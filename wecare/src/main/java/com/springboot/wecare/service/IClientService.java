@@ -10,7 +10,7 @@ public interface IClientService {
 	public List<Client> getAll();
 	public String register(Client client) ;
 	public String viewProfileInfo(long cliId);
-	public String updateProfileInfo(Client client, Object[] fieldsToUpd) ;
-	public String removeClient(Client client);
+	public String updateProfileInfo(long cliId, Object[] fieldsToUpd) ;
+	public String removeClient(long cliId);
 
 }
