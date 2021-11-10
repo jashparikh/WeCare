@@ -19,3 +19,10 @@ CREATE TABLE wecare.appointments (
   `manager_id` int(10),
   PRIMARY KEY (`appointment_id`)
 );
+
+CREATE TABLE wecare.firstappointment (
+`firstappointment_id` int(10) NOT NULL AUTO_INCREMENT,
+  `appointment_duration` varchar (10) default NULL,
+  `client_id` int(10),
+  PRIMARY KEY (`firstappointment_id`)
+);
