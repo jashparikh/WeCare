@@ -15,6 +15,7 @@ import com.springboot.wecare.repository.CaregiverRepository;
 
 @Service
 public class CaregiverService implements ICaregiverService {
+	
 	@Autowired
 	CaregiverRepository caregiverRepository;
 
@@ -84,21 +85,26 @@ public class CaregiverService implements ICaregiverService {
 	}
 
 	@Override
-	public void RequestAppoinmentCancellation() {
-		
-
+	public String caregiverInfo(long caregiverid) {	
+	
+			try {
+				Optional<Caregiver> searchrecord = caregiverRepository.findByCaregiverid(caregiverid);
+				Caregiver RetrieveCaregiver= searchrecord.get();
+				return RetrieveCaregiver.toString();
+				
+				
+			}catch (Exception e) {
+				return e.getMessage();
 			} 
+			
+			
+			
+		}
+	}
+
+
+
 	
+
 	
-	/*public abstract void login(Caregiver caregiver);
-	public abstract void Firsttimelogin();
-	public abstract void RequestAppoinmentCancellation();
-	public abstract void viewChatSupportContactDetails();
-	public abstract void viewCallSupportContactDetails();
-	public abstract void viewAppointments();
-	public abstract void viewPatientInfo();
-	public abstract void viewAppointmentHistory();
-	public abstract void viewProfileInfo();
-	public abstract void UpdateProfileInfo();
-	public abstract void resetPassword();*/
-}
+

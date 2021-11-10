@@ -14,7 +14,7 @@ public class Caregiver {
 	@Id
 	@Column(name = "caregiver_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int caregiverid;
+	private long caregiverid;
 
 	@Column(name = "caregiver_name")
 	private String caregiverName;
@@ -67,7 +67,7 @@ public class Caregiver {
 		this.loginId = loginId;
 	}
 
-	public int getCaregiverid() {
+	public long getCaregiverid() {
 		return caregiverid;
 	}
 
