@@ -12,5 +12,5 @@ public interface CaregiverRepository extends JpaRepository<Caregiver, Integer> {
 	
 	Optional<Caregiver> findByCaregiverContactNo(String caregiverContactNo);
 	
-	Optional<Caregiver> findByCaregiverid(int caregiverid);
+	Optional<Caregiver> findByCaregiverid(long caregiverid);
 }

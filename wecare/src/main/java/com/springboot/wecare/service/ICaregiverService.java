@@ -6,17 +6,24 @@ import com.springboot.wecare.model.Caregiver;
 
 
 public interface ICaregiverService {
-		/*public abstract void login(Caregiver caregiver);
-		public abstract void Firsttimelogin();
+		
+		/*public abstract void Firsttimelogin();
 		public abstract void RequestAppoinmentCancellation();
 		public abstract void viewChatSupportContactDetails();
 		public abstract void viewCallSupportContactDetails();
-		public abstract void viewAppointments();
-		public abstract void viewPatientInfo();
-		public abstract void viewAppointmentHistory();
-		public abstract void viewProfileInfo();
-		public abstract void UpdateProfileInfo();
+		public abstract void viewAppointments();--
+		public abstract void viewPatientInfo(); --
+		public abstract void viewAppointmentHistory();--
+		public abstract void viewProfileInfo(); --
+		public abstract void UpdateProfileInfo();--
 		public abstract void resetPassword();*/
+		
+	
+	//public String login(Caregiver caregiver); 
+	
+    public String caregiverInfo(long caregiverid);
+    
+    
 	
 	public List<Caregiver> getAll();
 
@@ -26,6 +33,10 @@ public interface ICaregiverService {
     
     public String deleteCaregiver(String caregiverContactNo);
     
-    public abstract void RequestAppoinmentCancellation();
+    
+    
+    
+    
+
 
 }
