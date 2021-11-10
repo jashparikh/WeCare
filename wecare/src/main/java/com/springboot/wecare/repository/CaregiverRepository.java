@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.springboot.wecare.model.Caregiver;
 
 @Repository
-public interface CaregiverRepository extends JpaRepository<Caregiver, Integer> {
+public interface CaregiverRepository extends JpaRepository<Caregiver, Long> {
 	
 	Optional<Caregiver> findByCaregiverContactNo(String caregiverContactNo);
 	
