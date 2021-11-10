@@ -29,7 +29,7 @@ public class Appointment {
 	private String appointmentDuration;
 
 	@Column(name = "client_id")
-	private int clientID;
+	private Long clientID;
 
 	@Column(name = "caregiver_id")
 	private int caregiverID;
@@ -37,12 +37,19 @@ public class Appointment {
 	@Column(name = "manager_id")
 	private int managerID;
 
+	@Column(name ="is_confirmed")
+	private String isConfirmed;
+	
+	@Column(name ="schedule_id")
+	private  Long scheduleID;
+
 	public Appointment() {
 		super();
 	}
 
 	public Appointment(Long appointmentId, String appointmentDate, String appointmentFrequency,
-			String appointmentLength, String appointmentDuration, int clientID, int caregiverID, int managerID) {
+			String appointmentLength, String appointmentDuration, Long clientID, int caregiverID, int managerID,
+			String isConfirmed, Long scheduleID) {
 		super();
 		this.appointmentId = appointmentId;
 		this.appointmentDate = appointmentDate;
@@ -52,6 +59,8 @@ public class Appointment {
 		this.clientID = clientID;
 		this.caregiverID = caregiverID;
 		this.managerID = managerID;
+		this.isConfirmed = isConfirmed;
+		this.scheduleID = scheduleID;
 	}
 
 	public Long getAppointmentId() {
@@ -94,11 +103,11 @@ public class Appointment {
 		this.appointmentDuration = appointmentDuration;
 	}
 
-	public int getClientID() {
+	public Long getClientID() {
 		return clientID;
 	}
 
-	public void setClientID(int clientID) {
+	public void setClientID(Long clientID) {
 		this.clientID = clientID;
 	}
 
@@ -118,16 +127,29 @@ public class Appointment {
 		this.managerID = managerID;
 	}
 
+	public String getIsConfirmed() {
+		return isConfirmed;
+	}
+
+	public void setIsConfirmed(String isConfirmed) {
+		this.isConfirmed = isConfirmed;
+	}
+
+	public Long getScheduleID() {
+		return scheduleID;
+	}
+
+	public void setScheduleID(Long scheduleID) {
+		this.scheduleID = scheduleID;
+	}
+
 	@Override
 	public String toString() {
 		return "Appointment [appointmentId=" + appointmentId + ", appointmentDate=" + appointmentDate
 				+ ", appointmentFrequency=" + appointmentFrequency + ", appointmentLength=" + appointmentLength
 				+ ", appointmentDuration=" + appointmentDuration + ", clientID=" + clientID + ", caregiverID="
-				+ caregiverID + ", managerID=" + managerID + "]";
+				+ caregiverID + ", managerID=" + managerID + ", isConfirmed=" + isConfirmed + ", scheduleID="
+				+ scheduleID + "]";
 	}
-
-
-
-
 
 }
