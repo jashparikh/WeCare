@@ -1,5 +1,7 @@
 package com.springboot.wecare.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,13 +19,13 @@ public class Appointment {
 	private Long appointmentId;
 
 	@Column(name = "appointment_date")
-	private String appointmentDate;
+	private LocalDate appointmentDate;
 
 	@Column(name = "appointment_frequency")
 	private String appointmentFrequency;
 
 	@Column(name = "appointment_length")
-	private String appointmentLength;
+	private int appointmentLength;
 
 	@Column(name = "appointment_duration")
 	private String appointmentDuration;
@@ -32,10 +34,10 @@ public class Appointment {
 	private Long clientID;
 
 	@Column(name = "caregiver_id")
-	private int caregiverID;
+	private Long caregiverID;
 
 	@Column(name = "manager_id")
-	private int managerID;
+	private Long managerID;
 
 	@Column(name ="is_confirmed")
 	private String isConfirmed;
@@ -47,8 +49,8 @@ public class Appointment {
 		super();
 	}
 
-	public Appointment(Long appointmentId, String appointmentDate, String appointmentFrequency,
-			String appointmentLength, String appointmentDuration, Long clientID, int caregiverID, int managerID,
+	public Appointment(Long appointmentId, LocalDate appointmentDate, String appointmentFrequency,
+			int appointmentLength, String appointmentDuration, Long clientID, Long caregiverID, Long managerID,
 			String isConfirmed, Long scheduleID) {
 		super();
 		this.appointmentId = appointmentId;
@@ -62,6 +64,17 @@ public class Appointment {
 		this.isConfirmed = isConfirmed;
 		this.scheduleID = scheduleID;
 	}
+	
+	public Appointment(LocalDate appointmentDate, int appointmentLength, Long clientID, Long caregiverID,
+			String isConfirmed, Long scheduleID) {
+		super();
+		this.appointmentDate = appointmentDate;
+		this.appointmentLength = appointmentLength;
+		this.clientID = clientID;
+		this.caregiverID = caregiverID;
+		this.isConfirmed = isConfirmed;
+		this.scheduleID = scheduleID;
+	}
 
 	public Long getAppointmentId() {
 		return appointmentId;
@@ -71,11 +84,11 @@ public class Appointment {
 		this.appointmentId = appointmentId;
 	}
 
-	public String getAppointmentDate() {
+	public LocalDate getAppointmentDate() {
 		return appointmentDate;
 	}
 
-	public void setAppointmentDate(String appointmentDate) {
+	public void setAppointmentDate(LocalDate appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
 
@@ -87,11 +100,11 @@ public class Appointment {
 		this.appointmentFrequency = appointmentFrequency;
 	}
 
-	public String getAppointmentLength() {
+	public int getAppointmentLength() {
 		return appointmentLength;
 	}
 
-	public void setAppointmentLength(String appointmentLength) {
+	public void setAppointmentLength(int appointmentLength) {
 		this.appointmentLength = appointmentLength;
 	}
 
@@ -111,19 +124,19 @@ public class Appointment {
 		this.clientID = clientID;
 	}
 
-	public int getCaregiverID() {
+	public Long getCaregiverID() {
 		return caregiverID;
 	}
 
-	public void setCaregiverID(int caregiverID) {
+	public void setCaregiverID(Long caregiverID) {
 		this.caregiverID = caregiverID;
 	}
 
-	public int getManagerID() {
+	public long getManagerID() {
 		return managerID;
 	}
 
-	public void setManagerID(int managerID) {
+	public void setManagerID(Long managerID) {
 		this.managerID = managerID;
 	}
 
