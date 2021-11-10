@@ -15,7 +15,7 @@ public class Address {
 	@Id //next thing will be a primary key
 	@Column(name = "AddressId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int addressId;  
+	private long addressId;  
 
 	@Column(name = "AddressFirstLine")
 	private String addrFirLine;
@@ -32,7 +32,7 @@ public class Address {
 	@Column(name = "Eircode")
 	private String eircode;
 
-	public Address(int personId, String addrFirLine, String addrSecLine, String city, String county, String eircode) {
+	public Address(long personId, String addrFirLine, String addrSecLine, String city, String county, String eircode) {
 		super();
 		this.addressId = personId;
 		this.addrFirLine = addrFirLine;
@@ -82,7 +82,7 @@ public class Address {
 		this.eircode = eircode;
 	}
 
-	public int getPersonId() {
+	public long getPersonId() {
 		return addressId;
 	}
 

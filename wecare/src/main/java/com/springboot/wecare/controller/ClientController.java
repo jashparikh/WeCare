@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.springboot.wecare.model.Client;
+import com.springboot.wecare.service.IAppointmentService;
 import com.springboot.wecare.service.IClientService;
 
 @RestController //this class will be used as a controller
@@ -19,6 +20,7 @@ public class ClientController {
 
 	@Autowired //no need to add confirmations or properties for this class
 	IClientService clientService; //reference of clientservice
+	IAppointmentService appointmentService;
 
 	@GetMapping("/allClient")
 	public List<Client> getAllClients() {
@@ -41,14 +43,22 @@ public class ClientController {
 	
 	@CrossOrigin
 	@DeleteMapping("/removeClient")
-	public String removeClient(@RequestBody @Valid Client client) {
+	public String removeClient(@RequestParam @Valid long client) {
 		return clientService.removeClient(client);
 	}
 	
 	@CrossOrigin
 	@PutMapping("/updateClientProfileInfo")
-	public String updateClient(@RequestBody @Valid Client client, @RequestParam Object[] fields) {
+	public String updateClient(@RequestParam @Valid long client, @RequestParam @Valid Object[] fields) {
 		return clientService.updateProfileInfo(client, fields);
 	}
+	
+	@CrossOrigin
+	@PutMapping("/requestAppointment")
+	public String requestApt(@RequestParam @Valid long clientid, @RequestParam @Valid int durationInDays) {
+		return appointmentService.requestAppointment(clientid, durationInDays);
+	}
+	
+	
 	
 }

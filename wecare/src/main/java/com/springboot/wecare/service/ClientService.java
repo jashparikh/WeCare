@@ -36,8 +36,8 @@ public class ClientService implements IClientService {
 		}
 		}
 	
-	public String updateProfileInfo(Client client, Object[] fieldsToUpd) {
-		Optional<Client> clien = clientRepository.findById(client.getClientId());
+	public String updateProfileInfo(long client, Object[] fieldsToUpd) {
+		Optional<Client> clien = clientRepository.findById(client);
 		Client cli = clien.get();
 		if (fieldsToUpd[0]!=null) {
 				cli.setClientAddressId((int) fieldsToUpd[0]);
@@ -70,11 +70,11 @@ public class ClientService implements IClientService {
 		return ("Successfully saved");
 	}
 	
-	public String removeClient(Client client) {
+	public String removeClient(long client) {
 		//might need to send client to an archive repository + set state to deceased? 
 		//or add the reason why client is being archived
 		try {
-			clientRepository.deleteById(client.getClientId());
+			clientRepository.deleteById(client);
 		} catch (Exception e) {
 			return e.getMessage();
 		}
