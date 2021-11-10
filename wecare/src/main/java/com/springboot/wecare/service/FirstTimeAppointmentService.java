@@ -24,27 +24,19 @@ public class FirstTimeAppointmentService implements IFirstTimeAppointmentService
 	
 	@Transactional
 	public String requestFirstAppointment(Long clientId, String appointmentDuration) {
-		Optional <FirstTimeAppointment> searchRecord = clientRepository.findById(clientId.getClientId()); // error to be resolved when clientId is as Long
+		FirstTimeAppointment first = new FirstTimeAppointment();
+		first.setClientId(clientId);
+		first.setAppointmentDuration(appointmentDuration);
 		
-		if(searchRecord.isPresent()) {
-			try {
-				
-				FirstTimeAppointment updateFirstTimeAppointment = searchRecord.get();
-				
-				updateFirstTimeAppointment.setAppointmentDuration(appointmentDuration);
-				updateFirstTimeAppointment.setClientId(clientId);
-				
-				firstTimeAppointmentRepository.save(updateFirstTimeAppointment);
+			try {		 
+				firstTimeAppointmentRepository.save(first);
 				
 			}catch (Exception e) {
+				
 				return e.getMessage();
 			}
-		}else {
-			return "Client Doesn't Exist";
-	} 
-		return "First Appointment Saved";
-	}
-		return null;
+		
+		return "Appointment Created";
 	}
 
 	@Transactional

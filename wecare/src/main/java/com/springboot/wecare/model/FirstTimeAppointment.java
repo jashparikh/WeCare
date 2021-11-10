@@ -8,19 +8,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="firstappointment")
+@Table(name = "firstappointment")
 public class FirstTimeAppointment {
-	
+
 	@Id
 	@Column(name = "firstappointment_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long firstappointmentId;
-	
+
 	@Column(name = "client_id")
 	private Long clientId;
-	
+
 	@Column(name = "appointment_duration")
 	private String appointmentDuration;
+
+	public FirstTimeAppointment() {
+		super();
+	}
 
 	public FirstTimeAppointment(Long firstappointmentId, Long clientId, String appointmentDuration) {
 		super();
@@ -58,7 +62,5 @@ public class FirstTimeAppointment {
 		return "FirstTimeAppointment [firstappointmentId=" + firstappointmentId + ", clientId=" + clientId
 				+ ", appointmentDuration=" + appointmentDuration + "]";
 	}
-	
 
-	
 }
