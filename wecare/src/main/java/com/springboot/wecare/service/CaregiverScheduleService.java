@@ -7,8 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springboot.wecare.model.Appointment;
 import com.springboot.wecare.model.Caregiver;
 import com.springboot.wecare.model.CaregiverSchedule;
+import com.springboot.wecare.repository.AppointmentRepository;
 import com.springboot.wecare.repository.CaregiverRepository;
 import com.springboot.wecare.repository.CaregiverScheduleRepository;
 @Service
@@ -17,6 +19,7 @@ public class CaregiverScheduleService implements ICaregiverScheduleService {
 	@Autowired
 	CaregiverScheduleRepository caregiverScheduleRepository;
 	CaregiverRepository caregiverRepository;
+	AppointmentRepository aptRepository;
 
 	public List<CaregiverSchedule> getAllEmployeeSchedules() {
 		return caregiverScheduleRepository.findAll();
@@ -32,14 +35,31 @@ public class CaregiverScheduleService implements ICaregiverScheduleService {
 		}
 		return cgSch;
 	}
+	
+	public List<Appointment> getAllAptFor(LocalDate date, long cgId){
+		List<Appointment> all = aptRepository.findAll();
+		List<Appointment> ok = new ArrayList<Appointment>();
+		for (Appointment apt : all) {
+			if(apt.getCaregiverID()==cgId && apt.getAppointmentDate()==date) {
+				ok.add(apt);
+			}
+		}
+		return ok;
+	}
 
 	public List<Caregiver> findAvailableFor(LocalDate date, int startTime, int endTime){
 		List<CaregiverSchedule> allCgSch = getAllEmployeeSchedules();
 		List<Caregiver> cgList = new ArrayList<Caregiver>();
 		for (CaregiverSchedule cg : allCgSch) {
 			if (cg.getDate()==date && cg.getStartTime()<startTime && cg.getEndTime() > endTime) {
-				//add condition to check that they don't already have an appointment
-				cgList.add(caregiverRepository.getById(cg.getCaregiverid()));
+				//condition to check that they don't already have an appointment:
+				for (Appointment apt : getAllAptFor(date, cg.getCaregiverid())) { //manually checking that 
+					//this new apt would not coincide with an already existing apt
+					if (!((apt.getAppointmentStartTime()>= startTime && apt.getAppointmentStartTime()<=endTime)||
+					(apt.getAppointmentEndTime()>= startTime && apt.getAppointmentEndTime()<=endTime))) {
+						cgList.add(caregiverRepository.getById(cg.getCaregiverid()));
+					}
+				}
 			}
 		}
 		return cgList;
