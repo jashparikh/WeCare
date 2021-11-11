@@ -21,6 +21,12 @@ public class Appointment {
 	@Column(name = "appointment_date")
 	private LocalDate appointmentDate;
 
+	@Column (name = "appointment_startTime")
+	private int appointmentStartTime;
+
+	@Column (name = "appointment_endTime")
+	private int appointmentEndTime;
+
 	@Column(name = "appointment_frequency")
 	private String appointmentFrequency;
 
@@ -41,7 +47,7 @@ public class Appointment {
 
 	@Column(name ="is_confirmed")
 	private String isConfirmed;
-	
+
 	@Column(name ="schedule_id")
 	private  Long scheduleID;
 
@@ -64,16 +70,40 @@ public class Appointment {
 		this.isConfirmed = isConfirmed;
 		this.scheduleID = scheduleID;
 	}
-	
-	public Appointment(LocalDate appointmentDate, int appointmentLength, Long clientID, Long caregiverID,
+
+	public Appointment(LocalDate appointmentDate, int appointmentStartTime, int appointmentLength, Long clientID, Long caregiverID,
 			String isConfirmed, Long scheduleID) {
 		super();
 		this.appointmentDate = appointmentDate;
+		this.appointmentStartTime = appointmentStartTime;
 		this.appointmentLength = appointmentLength;
 		this.clientID = clientID;
 		this.caregiverID = caregiverID;
 		this.isConfirmed = isConfirmed;
 		this.scheduleID = scheduleID;
+		int endMin = (appointmentStartTime+appointmentLength+20)%100;
+		if (endMin>=60) {
+			this.appointmentEndTime = (appointmentStartTime/100)*100 + 100+endMin%60;
+		}
+		else { this.appointmentEndTime = appointmentStartTime+appointmentLength+20;}
+	}
+
+	public int getAppointmentStartTime() {
+		return appointmentStartTime;
+	}
+
+	public void setAppointmentStartTime(int appointmentStartTime) {
+		this.appointmentStartTime = appointmentStartTime;
+		
+		int endMin = (appointmentStartTime+this.appointmentLength+20)%100;
+		if (endMin>=60) {
+			this.appointmentEndTime = (appointmentStartTime/100)*100 + 100+endMin%60;
+		}
+		else { this.appointmentEndTime = appointmentStartTime+this.appointmentLength+20;}
+	}
+	
+	public int getAppointmentEndTime() {
+		return appointmentEndTime;
 	}
 
 	public Long getAppointmentId() {
@@ -106,6 +136,12 @@ public class Appointment {
 
 	public void setAppointmentLength(int appointmentLength) {
 		this.appointmentLength = appointmentLength;
+		
+		int endMin = (this.appointmentStartTime+appointmentLength+20)%100;
+		if (endMin>=60) {
+			this.appointmentEndTime = (this.appointmentStartTime/100)*100 + 100+endMin%60;
+		}
+		else { this.appointmentEndTime = this.appointmentStartTime+appointmentLength+20;}
 	}
 
 	public String getAppointmentDuration() {
