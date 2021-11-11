@@ -1,5 +1,6 @@
 package com.springboot.wecare.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,10 @@ public class FirstTimeAppointmentService implements IFirstTimeAppointmentService
 	
 	
 	@Transactional
-	public String requestFirstAppointment(Long clientId, String appointmentDuration) {
+	public String requestFirstAppointment(FirstTimeAppointment appointment) {
 		FirstTimeAppointment first = new FirstTimeAppointment();
-		first.setClientId(clientId);
-		first.setAppointmentDuration(appointmentDuration);
+		first.setClientId(appointment.getClientId());
+		first.setAppointmentDuration(appointment.getAppointmentDuration());
 		
 			try {		 
 				firstTimeAppointmentRepository.save(first);
@@ -40,11 +41,16 @@ public class FirstTimeAppointmentService implements IFirstTimeAppointmentService
 	}
 
 	@Transactional
-	public String cancelFirstAppointment(Long clientId, String appointmentDuration) {
+	public String cancelFirstAppointment(FirstTimeAppointment appointment) {
 		
 		
 		return null;
 	}
+
+	@Transactional
+	public List<FirstTimeAppointment> getAll() {
+		return firstTimeAppointmentRepository.findAll();
+		}
 
 	
 }
