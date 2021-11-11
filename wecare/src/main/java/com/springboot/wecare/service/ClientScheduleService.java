@@ -44,7 +44,7 @@ public class ClientScheduleService implements IClientScheduleService{
 
 	public List<Appointment> generateClientSchedule(long firstAptId){
 			FirstTimeAppointment firstApt = firstTimeAptRep.getById(firstAptId);
-			List<Appointment> listFinalApt = null ;
+			List<Appointment> listFinalApt = new ArrayList<Appointment>();
 			int dur = Integer.parseInt(firstApt.getAppointmentDuration()); //number of days needed
 			double freq = firstApt.getAppointmentFrequency(); //# per week, if >7 then one or multiple days will have two apt 
 			//instead of frequency : let's set time apart from appointments (3 = every 3 days, 0.5 = every 12 hours)
@@ -53,7 +53,7 @@ public class ClientScheduleService implements IClientScheduleService{
 			LocalDateTime tempDate = LocalDateTime.now().withHour(12).withMinute(0);
 			LocalDateTime endDate = tempDate.plusDays(dur);
 			
-			List<LocalDateTime> neededAptDates = null;
+			List<LocalDateTime> neededAptDates = new ArrayList<LocalDateTime>();
 			while (tempDate.isBefore(endDate)) {
 				neededAptDates.add(tempDate);
 				tempDate = tempDate.plusHours((long) freq*24);
@@ -78,7 +78,7 @@ public class ClientScheduleService implements IClientScheduleService{
 				cs.setClientId(firstApt.getClientId());
 				clientScheduleRepository.save(cs);
 				
-				Appointment appt = new Appointment(apt.toLocalDate(), length, firstApt.getClientId(), cg.getCaregiverid(), "False", cs.getClientScheduleId());	
+				Appointment appt = new Appointment(apt.toLocalDate(), startTime, length, firstApt.getClientId(), cg.getCaregiverid(), "False", cs.getClientScheduleId());	
 				appointmentRep.save(appt);
 				listFinalApt.add(appt);
 			}
