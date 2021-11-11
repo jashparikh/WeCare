@@ -21,16 +21,25 @@ public class FirstTimeAppointment {
 
 	@Column(name = "appointment_duration")
 	private String appointmentDuration;
+	
+	@Column(name = "appointmentfrequency")
+	private Double appointmentFrequency;
+
+@Column(name = "appointmentlength")
+	private int appointmentLength;
 
 	public FirstTimeAppointment() {
 		super();
 	}
 
-	public FirstTimeAppointment(Long firstappointmentId, Long clientId, String appointmentDuration) {
+	public FirstTimeAppointment(Long firstappointmentId, Long clientId, String appointmentDuration,
+			Double appointmentFrequency, int appointmentLength) {
 		super();
 		this.firstappointmentId = firstappointmentId;
 		this.clientId = clientId;
 		this.appointmentDuration = appointmentDuration;
+		this.appointmentFrequency = appointmentFrequency;
+		this.appointmentLength = appointmentLength;
 	}
 
 	public Long getFirstappointmentId() {
@@ -57,10 +66,28 @@ public class FirstTimeAppointment {
 		this.appointmentDuration = appointmentDuration;
 	}
 
+	public Double getAppointmentFrequency() {
+		return appointmentFrequency;
+	}
+
+	public void setAppointmentFrequency(Double appointmentFrequency) {
+		this.appointmentFrequency = appointmentFrequency;
+	}
+
+	public int getAppointmentLength() {
+		return appointmentLength;
+	}
+
+	public void setAppointmentLength(int appointmentLength) {
+		this.appointmentLength = appointmentLength;
+	}
+
 	@Override
 	public String toString() {
 		return "FirstTimeAppointment [firstappointmentId=" + firstappointmentId + ", clientId=" + clientId
-				+ ", appointmentDuration=" + appointmentDuration + "]";
+				+ ", appointmentDuration=" + appointmentDuration + ", appointmentFrequency=" + appointmentFrequency
+				+ ", appointmentLength=" + appointmentLength + "]";
 	}
 
+	
 }

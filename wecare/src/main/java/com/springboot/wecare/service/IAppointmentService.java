@@ -25,5 +25,4 @@ public interface IAppointmentService {
 	
 	public String viewMyCaregiverInfo(Long clientId);
 	
-	public String cancelAppointment(Long appointmentId);
 }

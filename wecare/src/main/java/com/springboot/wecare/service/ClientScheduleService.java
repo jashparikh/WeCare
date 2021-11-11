@@ -44,21 +44,21 @@ public class ClientScheduleService implements IClientScheduleService{
 
 	public List<Appointment> generateClientSchedule(long firstAptId){
 			FirstTimeAppointment firstApt = firstTimeAptRep.getById(firstAptId);
-			List<Appointment> listFinalApt ;
-			int dur = firstApt.getAppointmentDuration(); //number of days needed
-			float freq = firstApt.getAppointmentFrequency(); //# per week, if >7 then one or multiple days will have two apt 
+			List<Appointment> listFinalApt = null ;
+			int dur = Integer.parseInt(firstApt.getAppointmentDuration()); //number of days needed
+			double freq = firstApt.getAppointmentFrequency(); //# per week, if >7 then one or multiple days will have two apt 
 			//instead of frequency : let's set time apart from appointments (3 = every 3 days, 0.5 = every 12 hours)
 			int length = firstApt.getAppointmentLength(); //how long will an appointment last? in minutes
 			
 			LocalDateTime tempDate = LocalDateTime.now().withHour(12).withMinute(0);
 			LocalDateTime endDate = tempDate.plusDays(dur);
 			
-			List<LocalDateTime> neededAptDates;
+			List<LocalDateTime> neededAptDates = null;
 			while (tempDate.isBefore(endDate)) {
 				neededAptDates.add(tempDate);
 				tempDate = tempDate.plusHours((long) freq*24);
 			}
-			CaregiverScheduleService css;
+			CaregiverScheduleService css = null;
 			for (LocalDateTime apt : neededAptDates) {
 				int startTime = apt.getHour()*100+apt.getMinute();
 				int endTime = apt.plusMinutes(length).getHour()*100+apt.plusMinutes(length).getMinute();
