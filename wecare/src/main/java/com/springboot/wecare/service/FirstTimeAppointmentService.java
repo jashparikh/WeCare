@@ -14,43 +14,49 @@ import com.springboot.wecare.repository.ClientRepository;
 import com.springboot.wecare.repository.FirstTimeAppointmentRepository;
 
 @Service
-public class FirstTimeAppointmentService implements IFirstTimeAppointmentService{
+public class FirstTimeAppointmentService implements IFirstTimeAppointmentService {
 
 	@Autowired
 	ClientRepository clientRepository;
 
 	@Autowired
 	FirstTimeAppointmentRepository firstTimeAppointmentRepository;
-	
-	
-	@Transactional
-	public String requestFirstAppointment(FirstTimeAppointment appointment) {
-		FirstTimeAppointment first = new FirstTimeAppointment();
-		first.setClientId(appointment.getClientId());
-		first.setAppointmentDuration(appointment.getAppointmentDuration());
-		
-			try {		 
-				firstTimeAppointmentRepository.save(first);
-				
-			}catch (Exception e) {
-				
-				return e.getMessage();
-			}
-		
-		return "Appointment Created";
-	}
-
-	@Transactional
-	public String cancelFirstAppointment(FirstTimeAppointment appointment) {
-		
-		
-		return null;
-	}
 
 	@Transactional
 	public List<FirstTimeAppointment> getAll() {
 		return firstTimeAppointmentRepository.findAll();
+	}
+
+	@Transactional
+	public String requestFirstAppointment(FirstTimeAppointment firstappointment) {
+		FirstTimeAppointment first = new FirstTimeAppointment();
+		first.setClientId(firstappointment.getClientId());
+		first.setAppointmentLength(firstappointment.getAppointmentLength());
+																			
+		first.setAppointmentFrequency(firstappointment.getAppointmentFrequency()); 
+																			
+		first.setAppointmentDuration(firstappointment.getAppointmentDuration());
+
+		try {
+			firstTimeAppointmentRepository.save(first);
+
+		} catch (Exception e) {
+
+			return e.getMessage();
 		}
 
-	
+		return "Appointment Created";
+	}
+
+	@Transactional
+	public String cancelFirstAppointment(Long firstappointmentId) {
+		try {
+			Optional<FirstTimeAppointment> firstappointment = firstTimeAppointmentRepository
+					.findById(firstappointmentId);
+			firstTimeAppointmentRepository.delete(firstappointment.get());
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		return "First Appointment Deleted";
+	}
 }

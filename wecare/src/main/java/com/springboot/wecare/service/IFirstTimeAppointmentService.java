@@ -8,7 +8,7 @@ public interface IFirstTimeAppointmentService {
 
 	public String requestFirstAppointment(FirstTimeAppointment appointment);
 	
-	public String cancelFirstAppointment (FirstTimeAppointment appointment);
+	public String cancelFirstAppointment (Long firstappointmentId);
 
 	public List<FirstTimeAppointment> getAll();
 }

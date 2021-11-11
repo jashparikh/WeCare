@@ -100,25 +100,33 @@ public class AppointmentService implements IAppointmentService {
 		}
 		else
 		{
-			return "No such client exists. Please map the correct ID to retrieve appointment.";
+			return "No such client exists.";
 		}
 }
 
 	@Transactional
 	public String viewCaregiverAppointment(Long caregiverid) {
 		
-		return null;
+		Optional <Caregiver> searchRecord = caregiverRepository.findById(caregiverid);
+		if(searchRecord.isPresent())
+		{
+			try {
+				return caregiverRepository.findById(caregiverid).toString();
+					
+			} catch (Exception e)
+			{
+				return e.getMessage();
+			}
+		}
+		else
+		{
+			return "No such caregiver exists.";
+		}
 	}
 
 	@Transactional
 	public String viewMyCaregiverInfo(Long clientId) {
-
-		return null;
-	}
-
-	@Transactional
-	public String cancelAppointment(Long appointmentId) {
-
+		
 		return null;
 	}
 
@@ -135,6 +143,7 @@ public class AppointmentService implements IAppointmentService {
 
 	@Transactional
 	public String approveOrDenyAppointment(Long appointmentId, Long clientId) {
+		
 		return null;
 	}
 	

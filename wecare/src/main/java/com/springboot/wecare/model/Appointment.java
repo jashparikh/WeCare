@@ -88,6 +88,10 @@ public class Appointment {
 		else { this.appointmentEndTime = appointmentStartTime+appointmentLength+20;}
 	}
 
+	public Appointment(LocalDate localDate, int length, Long clientId2, long caregiverid2, String string,
+			Long clientScheduleId) {
+	}
+
 	public int getAppointmentStartTime() {
 		return appointmentStartTime;
 	}
