@@ -21,7 +21,6 @@ public class CaregiverService implements ICaregiverService {
 
 	public List<Caregiver> getAll() {
 		return caregiverRepository.findAll();
-
 	}
 
 	public String addCaregiver(Caregiver caregiver) {
@@ -33,8 +32,6 @@ public class CaregiverService implements ICaregiverService {
 		}
 		return "Caregiver Saved";
 	}
-
-	
 
 
 	@Transactional
@@ -55,8 +52,7 @@ public class CaregiverService implements ICaregiverService {
 					UpdateCaregiver.setCaregiverDob(caregiver.getCaregiverDob());
 					UpdateCaregiver.setCaregiverContactNo(caregiver.getCaregiverContactNo());
 					UpdateCaregiver.setAddressId(caregiver.getAddressId());
-					UpdateCaregiver.setLoginId(caregiver.getLoginId());
-				
+					UpdateCaregiver.setLoginId(caregiver.getLoginId());			
 					
 					caregiverRepository.save(UpdateCaregiver);
 				} 
@@ -73,9 +69,9 @@ public class CaregiverService implements ICaregiverService {
 
 
 	@Transactional
-	public String deleteCaregiver(String caregiverContactNo) {
+	public String deleteCaregiver(long caregiverid) {
 		try {
-			Optional<Caregiver> caregiver = caregiverRepository.findByCaregiverContactNo(caregiverContactNo);
+			Optional<Caregiver> caregiver = caregiverRepository.findByCaregiverid(caregiverid);
 			caregiverRepository.delete(caregiver.get());
 		} catch (Exception e) {
 			return e.getMessage();
@@ -100,6 +96,18 @@ public class CaregiverService implements ICaregiverService {
 			
 			
 		}
+
+	@Override
+	public String resetPassword(String newPassword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String login(Long clientId, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	}
 
 

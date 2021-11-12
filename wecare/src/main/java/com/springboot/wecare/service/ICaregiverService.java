@@ -2,6 +2,8 @@ package com.springboot.wecare.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.springboot.wecare.model.Caregiver;
 
 
@@ -31,7 +33,13 @@ public interface ICaregiverService {
     
     public String updateCaregiver(Caregiver caregiver);
     
-    public String deleteCaregiver(String caregiverContactNo);
+    public String deleteCaregiver(long caregiverid);
+    
+  //Call to login class 
+
+    public String resetPassword(String newPassword); 
+
+    public String login(Long clientId, String password); 
     
     
     
