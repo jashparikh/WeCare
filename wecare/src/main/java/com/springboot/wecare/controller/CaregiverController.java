@@ -73,8 +73,8 @@ public class CaregiverController {
 	
 	@CrossOrigin
 	@DeleteMapping("/deleteCaregiver")
-	public String deleteCaregiver(@RequestParam @Valid String caregiverContactNo) {
-		String response = caregiverService.deleteCaregiver(caregiverContactNo);
+	public String deleteCaregiver(@RequestParam @Valid long caregiverid) {
+		String response = caregiverService.deleteCaregiver(caregiverid);
 
 		return response;
 	}
