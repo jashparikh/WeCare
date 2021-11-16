@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.wecare.model.Address;
 import com.springboot.wecare.model.Login;
 import com.springboot.wecare.service.ILoginService;
 
@@ -30,10 +31,18 @@ public class LoginController {
 
 	@CrossOrigin
 	@PostMapping("/addLogin")
-	public String addLogin(@RequestBody @Valid Login login) {
-		String contact = loginService.addLogin(login);
+	public long addLogin(@RequestBody @Valid Login login) {
+		long loginID = loginService.addLogin(login);
 
-		return contact;
+		return loginID;
+	}
+	
+	@CrossOrigin
+	@PostMapping("/addaddress")
+	public long addaddress(@RequestBody @Valid Address address) {
+		long addressId = loginService.addaddress(address);
+
+		return addressId;
 	}
 
 	@CrossOrigin
@@ -55,8 +64,10 @@ public class LoginController {
 		return response;
 	}
 
-	@GetMapping("/validateLogin")
-	public String validateLogin(Login login) {
+	@CrossOrigin
+	@PostMapping("/validateLogin")
+	public long validateLogin(@RequestBody @Valid Login login) {
+		System.out.println("*************************" + login + "**************************************");
 
 		return loginService.validateLogin(login);
 	}
@@ -75,6 +86,14 @@ public class LoginController {
 		String response = loginService.unlockUser(login.getLoginId());
 
 		return response;
+	}
+	
+	@CrossOrigin
+	@PostMapping("/validateUsername")
+	public String validateUsername(@RequestBody @Valid Login login) {
+		System.out.println("*************************" + login + "**************************************");
+
+		return loginService.validateUsername(login);
 	}
 
 }
