@@ -2,7 +2,6 @@ package com.springboot.wecare.controller;
 
 import java.util.List;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import com.springboot.wecare.service.IqueryService;
 
 @RestController
 public class QueryController {
-	
+
 	@Autowired
 	IqueryService queryService;
 
@@ -39,14 +38,14 @@ public class QueryController {
 		String contact = queryService.addQuery(query);
 		return contact;
 	}
-	
+
 	@CrossOrigin
 	@PutMapping("/updateQuery")
 	public String updateQuery(@RequestBody @Valid Query query) {
 		String response = queryService.updateQuery(query);
 		return response;
 	}
-	
+
 	@CrossOrigin
 	@DeleteMapping("/deleteQuery")
 	public String deleteQuery(@RequestParam Long QueryID) {

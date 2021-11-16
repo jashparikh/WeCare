@@ -1,16 +1,11 @@
 package com.springboot.wecare.service;
 
 import java.util.List;
+
 import java.util.Optional;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.springboot.wecare.model.Appointment;
 import com.springboot.wecare.model.Caregiver;
 import com.springboot.wecare.model.Client;
@@ -23,18 +18,18 @@ public class AppointmentService implements IAppointmentService {
 
 	@Autowired
 	AppointmentRepository appointmentRepository;
-	
+
 	@Autowired
 	ClientRepository clientRepository;
-	
+
 	@Autowired
 	CaregiverRepository caregiverRepository;
-	
+
 	@Transactional
 	public List<Appointment> getAll() {
 		return appointmentRepository.findAll();
 	}
-	
+
 	@Transactional
 	public String addAppointment(Appointment appointment) {
 		try {
@@ -44,14 +39,13 @@ public class AppointmentService implements IAppointmentService {
 		}
 		return "Appointment Saved";
 	}
-	
-	@Transactional 
-	public String deleteAppointment(Long appointmentID)
-	{
+
+	@Transactional
+	public String deleteAppointment(Long appointmentID) {
 		try {
-			Optional <Appointment> appointment = appointmentRepository.findByAppointmentId(appointmentID);
+			Optional<Appointment> appointment = appointmentRepository.findByAppointmentId(appointmentID);
 			appointmentRepository.delete(appointment.get());
-		} catch (Exception e){
+		} catch (Exception e) {
 			return e.getMessage();
 		}
 		return "Appointment Deleted";
@@ -59,13 +53,13 @@ public class AppointmentService implements IAppointmentService {
 
 	@Transactional
 	public String updateAppointment(Appointment appointment) {
-		Optional <Appointment> searchRecord = appointmentRepository.findByAppointmentId(appointment.getAppointmentId());
-		
-		if(searchRecord.isPresent()) {
+		Optional<Appointment> searchRecord = appointmentRepository.findByAppointmentId(appointment.getAppointmentId());
+
+		if (searchRecord.isPresent()) {
 			try {
-				
+
 				Appointment updateAppointment = searchRecord.get();
-				
+
 				updateAppointment.setAppointmentDate(appointment.getAppointmentDate());
 				updateAppointment.setAppointmentDuration(appointment.getAppointmentDuration());
 				updateAppointment.setAppointmentFrequency(appointment.getAppointmentFrequency());
@@ -73,61 +67,47 @@ public class AppointmentService implements IAppointmentService {
 				updateAppointment.setCaregiverID(appointment.getCaregiverID());
 				updateAppointment.setClientID(appointment.getClientID());
 				updateAppointment.setManagerID(appointment.getManagerID());
-				
+
 				appointmentRepository.save(updateAppointment);
-				
-			}catch (Exception e) {
+
+			} catch (Exception e) {
 				return e.getMessage();
 			}
-		}else {
+		} else {
 			return "Appointment Doesn't Exist";
-	} 
+		}
 		return "Appointment Deleted";
 	}
 
 	@Transactional
 	public String viewClientAppointment(Long clientId) {
-	Optional <Client> searchRecord = clientRepository.findById(clientId);
-		if(searchRecord.isPresent())
-		{
+		Optional<Client> searchRecord = clientRepository.findById(clientId);
+		if (searchRecord.isPresent()) {
 			try {
 				return clientRepository.findById(clientId).toString();
-					
-			} catch (Exception e)
-			{
-				return e.getMessage();
-			}
-		}
-		else
-		{
-			return "No such client exists.";
-		}
-}
 
-	@Transactional
-	public String viewCaregiverAppointment(Long caregiverid) {
-		
-		Optional <Caregiver> searchRecord = caregiverRepository.findById(caregiverid);
-		if(searchRecord.isPresent())
-		{
-			try {
-				return caregiverRepository.findById(caregiverid).toString();
-					
-			} catch (Exception e)
-			{
+			} catch (Exception e) {
 				return e.getMessage();
 			}
-		}
-		else
-		{
-			return "No such caregiver exists.";
+		} else {
+			return "No such client exists.";
 		}
 	}
 
 	@Transactional
-	public String viewMyCaregiverInfo(Long clientId) {
-		
-		return null;
+	public String viewCaregiverAppointment(Long caregiverid) {
+
+		Optional<Caregiver> searchRecord = caregiverRepository.findById(caregiverid);
+		if (searchRecord.isPresent()) {
+			try {
+				return caregiverRepository.findById(caregiverid).toString();
+
+			} catch (Exception e) {
+				return e.getMessage();
+			}
+		} else {
+			return "No such caregiver exists.";
+		}
 	}
 
 	@Transactional
@@ -137,14 +117,14 @@ public class AppointmentService implements IAppointmentService {
 		appointment.setIsConfirmed("false");
 		appointment.setClientID(clientId);
 		appointmentRepository.save(appointment);
-		
+
 		return null;
 	}
 
 	@Transactional
 	public String approveOrDenyAppointment(Long appointmentId, Long clientId) {
-		
+
 		return null;
 	}
-	
-	}
+
+}

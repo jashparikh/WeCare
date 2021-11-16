@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="appointments")
+@Table(name = "appointments")
 public class Appointment {
 
 	@Id
@@ -21,10 +21,10 @@ public class Appointment {
 	@Column(name = "appointment_date")
 	private LocalDate appointmentDate;
 
-	@Column (name = "appointment_startTime")
+	@Column(name = "appointment_startTime")
 	private int appointmentStartTime;
 
-	@Column (name = "appointment_endTime")
+	@Column(name = "appointment_endTime")
 	private int appointmentEndTime;
 
 	@Column(name = "appointment_frequency")
@@ -45,11 +45,11 @@ public class Appointment {
 	@Column(name = "manager_id")
 	private Long managerID;
 
-	@Column(name ="is_confirmed")
+	@Column(name = "is_confirmed")
 	private String isConfirmed;
 
-	@Column(name ="schedule_id")
-	private  Long scheduleID;
+	@Column(name = "schedule_id")
+	private Long scheduleID;
 
 	public Appointment() {
 		super();
@@ -71,8 +71,8 @@ public class Appointment {
 		this.scheduleID = scheduleID;
 	}
 
-	public Appointment(LocalDate appointmentDate, int appointmentStartTime, int appointmentLength, Long clientID, Long caregiverID,
-			String isConfirmed, Long scheduleID) {
+	public Appointment(LocalDate appointmentDate, int appointmentStartTime, int appointmentLength, Long clientID,
+			Long caregiverID, String isConfirmed, Long scheduleID) {
 		super();
 		this.appointmentDate = appointmentDate;
 		this.appointmentStartTime = appointmentStartTime;
@@ -81,11 +81,12 @@ public class Appointment {
 		this.caregiverID = caregiverID;
 		this.isConfirmed = isConfirmed;
 		this.scheduleID = scheduleID;
-		int endMin = (appointmentStartTime+appointmentLength+20)%100;
-		if (endMin>=60) {
-			this.appointmentEndTime = (appointmentStartTime/100)*100 + 100+endMin%60;
+		int endMin = (appointmentStartTime + appointmentLength + 20) % 100;
+		if (endMin >= 60) {
+			this.appointmentEndTime = (appointmentStartTime / 100) * 100 + 100 + endMin % 60;
+		} else {
+			this.appointmentEndTime = appointmentStartTime + appointmentLength + 20;
 		}
-		else { this.appointmentEndTime = appointmentStartTime+appointmentLength+20;}
 	}
 
 	public Appointment(LocalDate localDate, int length, Long clientId2, long caregiverid2, String string,
@@ -98,14 +99,15 @@ public class Appointment {
 
 	public void setAppointmentStartTime(int appointmentStartTime) {
 		this.appointmentStartTime = appointmentStartTime;
-		
-		int endMin = (appointmentStartTime+this.appointmentLength+20)%100;
-		if (endMin>=60) {
-			this.appointmentEndTime = (appointmentStartTime/100)*100 + 100+endMin%60;
+
+		int endMin = (appointmentStartTime + this.appointmentLength + 20) % 100;
+		if (endMin >= 60) {
+			this.appointmentEndTime = (appointmentStartTime / 100) * 100 + 100 + endMin % 60;
+		} else {
+			this.appointmentEndTime = appointmentStartTime + this.appointmentLength + 20;
 		}
-		else { this.appointmentEndTime = appointmentStartTime+this.appointmentLength+20;}
 	}
-	
+
 	public int getAppointmentEndTime() {
 		return appointmentEndTime;
 	}
@@ -140,12 +142,13 @@ public class Appointment {
 
 	public void setAppointmentLength(int appointmentLength) {
 		this.appointmentLength = appointmentLength;
-		
-		int endMin = (this.appointmentStartTime+appointmentLength+20)%100;
-		if (endMin>=60) {
-			this.appointmentEndTime = (this.appointmentStartTime/100)*100 + 100+endMin%60;
+
+		int endMin = (this.appointmentStartTime + appointmentLength + 20) % 100;
+		if (endMin >= 60) {
+			this.appointmentEndTime = (this.appointmentStartTime / 100) * 100 + 100 + endMin % 60;
+		} else {
+			this.appointmentEndTime = this.appointmentStartTime + appointmentLength + 20;
 		}
-		else { this.appointmentEndTime = this.appointmentStartTime+appointmentLength+20;}
 	}
 
 	public String getAppointmentDuration() {

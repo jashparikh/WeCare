@@ -20,13 +20,13 @@ public class Query {
 
 	@Column(name = "query_answered")
 	private Boolean isQueryAnswered;
-	
+
 	@Column(name = "client_id")
 	private int clientID;
-	
+
 	@Column(name = "caregiver_id")
 	private int caregiverID;
-	
+
 	@Column(name = "manager_id")
 	private int managerID;
 

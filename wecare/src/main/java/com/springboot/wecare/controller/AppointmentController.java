@@ -2,7 +2,6 @@ package com.springboot.wecare.controller;
 
 import java.util.List;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +36,14 @@ public class AppointmentController {
 
 		return contact;
 	}
-	
+
 	@CrossOrigin
 	@PutMapping("/updateAppointment")
 	public String updateAppointment(@RequestBody @Valid Appointment appointment) {
 		String response = appointmentService.updateAppointment(appointment);
 		return response;
 	}
-	
+
 	@CrossOrigin
 	@DeleteMapping("/deleteAppointment")
 	public String deleteAppointment(@RequestParam Long appointmentID) {

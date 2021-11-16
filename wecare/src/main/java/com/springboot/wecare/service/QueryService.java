@@ -11,10 +11,10 @@ import com.springboot.wecare.model.Query;
 import com.springboot.wecare.repository.QueryRepository;
 
 @Service
-public class QueryService implements IqueryService{
+public class QueryService implements IqueryService {
 	@Autowired
 	QueryRepository queryRepository;
-	
+
 	@Transactional
 	public List<Query> getAll() {
 		return queryRepository.findAll();
@@ -34,21 +34,21 @@ public class QueryService implements IqueryService{
 
 	@Transactional
 	public String updateQuery(Query query) {
-		
-		Optional <Query> searchRecord = queryRepository.findByQueryId(query.getQueryId());
-		if(searchRecord.isPresent()) {
+
+		Optional<Query> searchRecord = queryRepository.findByQueryId(query.getQueryId());
+		if (searchRecord.isPresent()) {
 			try {
-				
+
 				Query updateQuery = searchRecord.get();
-				
+
 				updateQuery.setQueryDescription(query.getQueryDescription());
 				updateQuery.setIsQueryAnswered(query.getIsQueryAnswered());
 				updateQuery.setCaregiverID(query.getCaregiverID());
 				updateQuery.setClientID(query.getClientID());
 				updateQuery.setManagerID(query.getManagerID());
-				
+
 				queryRepository.save(updateQuery);
-				
+
 			} catch (Exception e) {
 				return e.getMessage();
 			}
@@ -61,10 +61,9 @@ public class QueryService implements IqueryService{
 	@Transactional
 	public String deleteQuery(Long queryID) {
 		try {
-			Optional <Query> query = queryRepository.findByQueryId(queryID);
+			Optional<Query> query = queryRepository.findByQueryId(queryID);
 			queryRepository.delete(query.get());
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			return e.getMessage();
 		}
 		return "Query Deleted";

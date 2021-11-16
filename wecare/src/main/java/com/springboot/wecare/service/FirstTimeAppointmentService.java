@@ -32,9 +32,9 @@ public class FirstTimeAppointmentService implements IFirstTimeAppointmentService
 		FirstTimeAppointment first = new FirstTimeAppointment();
 		first.setClientId(firstappointment.getClientId());
 		first.setAppointmentLength(firstappointment.getAppointmentLength());
-																			
-		first.setAppointmentFrequency(firstappointment.getAppointmentFrequency()); 
-																			
+
+		first.setAppointmentFrequency(firstappointment.getAppointmentFrequency());
+
 		first.setAppointmentDuration(firstappointment.getAppointmentDuration());
 
 		try {
