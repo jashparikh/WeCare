@@ -1,7 +1,4 @@
 package com.springboot.wecare.model;
-
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +16,7 @@ public class Appointment {
 	private Long appointmentId;
 
 	@Column(name = "appointment_date")
-	private LocalDate appointmentDate;
+	private String appointmentDate;
 
 	@Column(name = "appointment_startTime")
 	private int appointmentStartTime;
@@ -55,7 +52,7 @@ public class Appointment {
 		super();
 	}
 
-	public Appointment(Long appointmentId, LocalDate appointmentDate, String appointmentFrequency,
+	public Appointment(Long appointmentId, String appointmentDate, String appointmentFrequency,
 			int appointmentLength, String appointmentDuration, Long clientID, Long caregiverID, Long managerID,
 			String isConfirmed, Long scheduleID) {
 		super();
@@ -71,7 +68,7 @@ public class Appointment {
 		this.scheduleID = scheduleID;
 	}
 
-	public Appointment(LocalDate appointmentDate, int appointmentStartTime, int appointmentLength, Long clientID,
+	public Appointment(String appointmentDate, int appointmentStartTime, int appointmentLength, Long clientID,
 			Long caregiverID, String isConfirmed, Long scheduleID) {
 		super();
 		this.appointmentDate = appointmentDate;
@@ -89,7 +86,7 @@ public class Appointment {
 		}
 	}
 
-	public Appointment(LocalDate localDate, int length, Long clientId2, long caregiverid2, String string,
+	public Appointment(String String, int length, Long clientId2, long caregiverid2, String string,
 			Long clientScheduleId) {
 	}
 
@@ -120,11 +117,11 @@ public class Appointment {
 		this.appointmentId = appointmentId;
 	}
 
-	public LocalDate getAppointmentDate() {
+	public String getAppointmentDate() {
 		return appointmentDate;
 	}
 
-	public void setAppointmentDate(LocalDate appointmentDate) {
+	public void setAppointmentDate(String appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
 
