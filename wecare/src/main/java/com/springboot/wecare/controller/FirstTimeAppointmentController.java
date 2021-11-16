@@ -33,12 +33,12 @@ public class FirstTimeAppointmentController {
 		String contact = firstTimeService.requestFirstAppointment(firstTimeAppointment);
 		return contact;
 	}
-	
+
 	@CrossOrigin
 	@PutMapping("/cancelFirstAppointment")
 	public String cancelFirstAppointment(@RequestBody @Valid FirstTimeAppointment firstTimeAppointment) {
 		String response = firstTimeService.requestFirstAppointment(firstTimeAppointment);
 		return response;
 	}
-	
+
 }

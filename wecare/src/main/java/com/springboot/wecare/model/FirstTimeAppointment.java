@@ -21,11 +21,11 @@ public class FirstTimeAppointment {
 
 	@Column(name = "appointment_duration")
 	private String appointmentDuration;
-	
+
 	@Column(name = "appointmentfrequency")
 	private Double appointmentFrequency;
 
-@Column(name = "appointmentlength")
+	@Column(name = "appointmentlength")
 	private int appointmentLength;
 
 	public FirstTimeAppointment() {
@@ -89,5 +89,4 @@ public class FirstTimeAppointment {
 				+ ", appointmentLength=" + appointmentLength + "]";
 	}
 
-	
 }
