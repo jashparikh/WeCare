@@ -24,8 +24,8 @@ public class AddressController {
 	@Autowired
 	IAddressService addressService;
 
-	@GetMapping("/allQueries")
-	public List<Address> getAllQueries() {
+	@GetMapping("/allAddresses")
+	public List<Address> getAllAddresses() {
 		System.out.println("Get all data..");
 
 		return addressService.getAll();
