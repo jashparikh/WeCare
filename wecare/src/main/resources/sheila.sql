@@ -15,11 +15,20 @@ CREATE TABLE wecare.cli (
  );
  
  create table wecare.address (
- `AddressId` int(11) not null auto_increment,
- `AddressFirstLine` varchar(255) default null,
- `AddressSecondLine` varchar(255) default null,
- `City` varchar(255) default null,
- `County` varchar(255) default null,
- `Eircode` varchar(255) default null,
+ `addressId` int(11) not null auto_increment,
+ `addressFirstLine` varchar(255) default null,
+ `addressSecondLine` varchar(255) default null,
+ `city` varchar(255) default null,
+ `county` varchar(255) default null,
+ `eircode` varchar(255) default null,
  PRIMARY KEY (`AddressId`)
  );
+ 
+ create table wecare.CaregiverSchedule (
+`shiftId` int(11) not null auto_increment,
+`caregiver_id ` int(11) default null,
+`date` date default null,
+`startTime` int(11) default 0,
+`endTime ` int(11) default 0,
+PRIMARY KEY (`shiftId`)
+ )
