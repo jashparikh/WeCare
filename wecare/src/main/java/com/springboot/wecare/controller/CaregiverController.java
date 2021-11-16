@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.wecare.model.Appointment;
 import com.springboot.wecare.model.Caregiver;
 import com.springboot.wecare.model.Login;
+import com.springboot.wecare.model.Query;
 import com.springboot.wecare.service.IAppointmentService;
 import com.springboot.wecare.service.ICaregiverService;
 import com.springboot.wecare.service.IClientService;
 import com.springboot.wecare.service.ILoginService;
+import com.springboot.wecare.service.IqueryService;
 
 
 @RestController
@@ -38,6 +40,9 @@ public class CaregiverController {
 	
 	@Autowired 
 	IClientService clientService;
+	
+	@Autowired
+	IqueryService queryService;
 
 	@GetMapping("/ViewProfileInfo")
 	public List<Caregiver> getAllCaregivers() {
@@ -80,39 +85,18 @@ public class CaregiverController {
 	}
 	
 	
-	@CrossOrigin
-	@PostMapping("/FirstlimeLogin")
-	public String addLogin(@RequestBody @Valid Login login) {
-		String contact = loginService.addLogin(login);
+	
+	
 
-		return contact;
+	@GetMapping("/allQueries")
+	public List<Query> getAllQueries() {
+		System.out.println("Get all data..");
+
+		return queryService.getAll();
 	}
 	
 	
-	@GetMapping("/viewPatientInfo")
-	public String seeProfile(@RequestParam @Valid long clientid) {
-		return clientService.viewProfileInfo(clientid);
-	}
 	
-	@GetMapping("/viewAppointments")
-	public List<Appointment> getAllBuyer() {
-		System.out.println("Get all data..");
-
-		return appointmentService.getAll();
-	}
 	
-	/*@GetMapping("/viewAppointmentHistory")
-	public List<Appointment> getAllBuyer() {
-		System.out.println("Get all data..");
-
-		return appointmentService.getAll();
-	}*/
-	
-	/*@GetMapping("/viewAppointmentInfo")
-	public List<Appointment> getAllBuyer() {
-		System.out.println("Get all data..");
-
-		return appointmentService.getAll();
-	}*/ 
 	
 }
