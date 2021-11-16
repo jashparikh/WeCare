@@ -13,28 +13,28 @@ import javax.persistence.Table;
 public class Address {
 	
 	@Id //next thing will be a primary key
-	@Column(name = "AddressId")
+	@Column(name = "addressId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long addressId;  
 
-	@Column(name = "AddressFirstLine")
+	@Column(name = "addressFirstLine")
 	private String addrFirLine;
 	
-	@Column(name = "AddressSecondLine")
+	@Column(name = "addressSecondLine")
 	private String addrSecLine;
 	
-	@Column(name = "City")
+	@Column(name = "city")
 	private String city;
 	
-	@Column(name = "County")
+	@Column(name = "county")
 	private String county;	
 	
-	@Column(name = "Eircode")
+	@Column(name = "eircode")
 	private String eircode;
 
-	public Address(long personId, String addrFirLine, String addrSecLine, String city, String county, String eircode) {
+	public Address(long addressId, String addrFirLine, String addrSecLine, String city, String county, String eircode) {
 		super();
-		this.addressId = personId;
+		this.addressId = addressId;
 		this.addrFirLine = addrFirLine;
 		this.addrSecLine = addrSecLine;
 		this.city = city;
@@ -82,7 +82,7 @@ public class Address {
 		this.eircode = eircode;
 	}
 
-	public long getPersonId() {
+	public long getAddressId() {
 		return addressId;
 	}
 
