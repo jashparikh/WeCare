@@ -1,6 +1,5 @@
 package com.springboot.wecare.service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class ClientScheduleService implements IClientScheduleService{
 	@Override
 	public List<Long> getClientSchedule(Long clientId) {
 		List<ClientSchedule> clientScheduleList;
-		List<Long> finalClientScheduleList=new ArrayList();
+		List<Long> finalClientScheduleList=new ArrayList<Long>();
 		clientScheduleList = clientScheduleRepository.findAll();
 		
 		for(ClientSchedule z :clientScheduleList)
@@ -58,7 +57,7 @@ public class ClientScheduleService implements IClientScheduleService{
 				neededAptDates.add(tempDate);
 				tempDate = tempDate.plusHours((long) freq*24);
 			}
-			CaregiverScheduleService css = null;
+			CaregiverScheduleService css = new CaregiverScheduleService();
 			for (LocalDateTime apt : neededAptDates) {
 				int startTime = apt.getHour()*100+apt.getMinute();
 				int endTime = apt.plusMinutes(length).getHour()*100+apt.plusMinutes(length).getMinute();
@@ -78,7 +77,7 @@ public class ClientScheduleService implements IClientScheduleService{
 				cs.setClientId(firstApt.getClientId());
 				clientScheduleRepository.save(cs);
 				
-				Appointment appt = new Appointment(apt.toLocalDate(), startTime, length, firstApt.getClientId(), cg.getCaregiverid(), "False", cs.getClientScheduleId());	
+				Appointment appt = new Appointment((apt.toLocalDate()).toString(), startTime, length, firstApt.getClientId(), cg.getCaregiverid(), "False", cs.getClientScheduleId());	
 				appointmentRep.save(appt);
 				listFinalApt.add(appt);
 			}

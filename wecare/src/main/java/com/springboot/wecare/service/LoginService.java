@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.springboot.wecare.model.Address;
 import com.springboot.wecare.model.Login;
+import com.springboot.wecare.repository.AddressRepository;
 import com.springboot.wecare.repository.LoginRepository;
 
 @Service
@@ -16,19 +18,24 @@ public class LoginService implements ILoginService {
 
 	@Autowired
 	LoginRepository loginRepository;
+	
+	@Autowired
+	AddressRepository addressRepository;
 
 	@Override
 	@Transactional
-	public String addLogin(@Valid Login login) {
+	public long addLogin(@Valid Login login) {
 		// TODO Auto-generated method stub
+		
+		Login savedlogin;
 		try {
-			loginRepository.save(login);
+			savedlogin=loginRepository.save(login);
 
 		} catch (Exception e) {
-			return e.getMessage();
+			return 0;
 		}
 
-		return "login Saved";
+		return savedlogin.getLoginId();
 	}
 
 	@Override
@@ -76,7 +83,7 @@ public class LoginService implements ILoginService {
 
 				Login updateLogin = searchRecord.get();
 
-				updateLogin.setUserName(login.getUserName());
+				updateLogin.setUsername(login.getUsername());
 				updateLogin.setPassword(login.getPassword());
 				updateLogin.setIsLocked("NO");
 
@@ -97,22 +104,23 @@ public class LoginService implements ILoginService {
 
 	@Override
 	@Transactional
-	public String validateLogin(Login login) {
+	public long validateLogin(Login login) {
 		Optional<Login> loginDetails;
 		try {
-			loginDetails = loginRepository.findByLoginId(login.getLoginId());
+			loginDetails = loginRepository.findByUsername(login.getUsername());
 
 		} catch (Exception e) {
-			return e.getMessage();
+			return 0;
 		}
 
-		String userName = loginDetails.get().getUserName();
+		String userName = loginDetails.get().getUsername();
 		String password = loginDetails.get().getPassword();
+		System.out.println(userName+"....."+password+"....."+login.getUsername()+login.getPassword());
 
-		if (login.getUserName() == userName && login.getPassword() == password) {
-			return "valid user";
+		if (login.getUsername().equals(userName) && login.getPassword().equals(password)) {
+			return loginDetails.get().getLoginId();
 		} else
-			return "invalid user";
+			return 0;
 	}
 
 	@Override
@@ -170,6 +178,38 @@ public class LoginService implements ILoginService {
 		}
 		return "User login access Unlocked";
 
+	}
+
+	@Override
+	public long addaddress(@Valid Address address) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		
+		Address savedAddress;
+				try {
+					savedAddress = addressRepository.save(address);
+
+				} catch (Exception e) {
+					return 0;
+				}
+
+				return savedAddress.getAddressId();
+	}
+
+	@Override
+	public String validateUsername(@Valid Login login) {
+		Optional<Login> searchRecord = loginRepository.findByUsername(login.getUsername());
+
+		if (searchRecord.isPresent()) {
+
+			return "username exists";
+
+		} else {
+
+			return "Success!";
+
+		}
+		
 	}
 
 }

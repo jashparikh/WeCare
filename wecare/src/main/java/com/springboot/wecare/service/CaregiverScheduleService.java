@@ -40,7 +40,7 @@ public class CaregiverScheduleService implements ICaregiverScheduleService {
 		List<Appointment> all = aptRepository.findAll();
 		List<Appointment> ok = new ArrayList<Appointment>();
 		for (Appointment apt : all) {
-			if(apt.getCaregiverID()==cgId && apt.getAppointmentDate()==date) {
+			if(apt.getCaregiverID()==cgId && LocalDate.parse(apt.getAppointmentDate()) ==date) {
 				ok.add(apt);
 			}
 		}
