@@ -21,7 +21,7 @@ CREATE TABLE wecare.cli (
  `city` varchar(255) default null,
  `county` varchar(255) default null,
  `eircode` varchar(255) default null,
- PRIMARY KEY (`AddressId`)
+ PRIMARY KEY (`addressId`)
  );
  
  create table wecare.CaregiverSchedule (
@@ -29,6 +29,6 @@ CREATE TABLE wecare.cli (
 `caregiver_id` int(11) default null,
 `date` date default null,
 `startTime` int(11) default 0,
-`endTime ` int(11) default 0,
+`endTime` int(11) default 0,
 PRIMARY KEY (`shiftId`)
  )
