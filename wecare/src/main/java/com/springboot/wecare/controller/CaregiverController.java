@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.wecare.model.Appointment;
 import com.springboot.wecare.model.Caregiver;
-import com.springboot.wecare.model.Login;
 import com.springboot.wecare.model.Query;
 import com.springboot.wecare.service.IAppointmentService;
 import com.springboot.wecare.service.ICaregiverService;
@@ -82,17 +79,14 @@ public class CaregiverController {
 		String response = caregiverService.deleteCaregiver(caregiverid);
 
 		return response;
-	}
-	
-	
-	
+	}	
 	
 
-	@GetMapping("/allQueries")
-	public List<Query> getAllQueries() {
-		System.out.println("Get all data..");
-
-		return queryService.getAll();
+	@CrossOrigin
+	@PostMapping("/addQuery")
+	public String addQuery(@RequestBody @Valid Query query) {
+		String contact = queryService.addQuery(query);
+		return contact;
 	}
 	
 	
