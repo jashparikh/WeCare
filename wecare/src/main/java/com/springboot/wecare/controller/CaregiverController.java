@@ -83,8 +83,8 @@ public class CaregiverController {
 	
 
 	@CrossOrigin
-	@PostMapping("/addQuery")
-	public String addQuery(@RequestBody @Valid Query query) {
+	@PostMapping("/addCgQuery")
+	public String addCgQuery(@RequestBody @Valid Query query) {
 		String contact = queryService.addQuery(query);
 		return contact;
 	}
