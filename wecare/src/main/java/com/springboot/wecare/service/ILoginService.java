@@ -17,12 +17,16 @@ public interface ILoginService {
 
 	long validateLogin(Login login);
 
-	String lockUser(Long loginId);
+	String lockUser(String string);
 
 	String unlockUser(Long loginId);
 
 	long addaddress(@Valid Address address);
 
 	String validateUsername(@Valid Login login);
+
+	long getClientId(Long loginId);
+
+	String checkedLocked( String username);
 
 }

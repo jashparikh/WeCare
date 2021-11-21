@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.wecare.model.Address;
+import com.springboot.wecare.model.Client;
 import com.springboot.wecare.model.Login;
 import com.springboot.wecare.repository.AddressRepository;
+import com.springboot.wecare.repository.ClientRepository;
 import com.springboot.wecare.repository.LoginRepository;
 
 @Service
@@ -21,6 +23,9 @@ public class LoginService implements ILoginService {
 	
 	@Autowired
 	AddressRepository addressRepository;
+	
+	@Autowired
+	ClientRepository clientRepository;
 
 	@Override
 	@Transactional
@@ -29,6 +34,7 @@ public class LoginService implements ILoginService {
 		
 		Login savedlogin;
 		try {
+			login.setIsLocked("NO");
 			savedlogin=loginRepository.save(login);
 
 		} catch (Exception e) {
@@ -108,26 +114,26 @@ public class LoginService implements ILoginService {
 		Optional<Login> loginDetails;
 		try {
 			loginDetails = loginRepository.findByUsername(login.getUsername());
+			String userName = loginDetails.get().getUsername();
+			String password = loginDetails.get().getPassword();
+			System.out.println(userName+"....."+password+"....."+login.getUsername()+login.getPassword());
+
+			if (login.getUsername().equals(userName) && login.getPassword().equals(password)) {
+				return loginDetails.get().getLoginId();
+			}
 
 		} catch (Exception e) {
 			return 0;
 		}
 
-		String userName = loginDetails.get().getUsername();
-		String password = loginDetails.get().getPassword();
-		System.out.println(userName+"....."+password+"....."+login.getUsername()+login.getPassword());
-
-		if (login.getUsername().equals(userName) && login.getPassword().equals(password)) {
-			return loginDetails.get().getLoginId();
-		} else
-			return 0;
+		return 0;
 	}
 
 	@Override
 	@Transactional
-	public String lockUser(Long loginId) {
+	public String lockUser(String username) {
 		// TODO Auto-generated method stub
-		Optional<Login> searchRecord = loginRepository.findByLoginId(loginId);
+		Optional<Login> searchRecord = loginRepository.findByUsername(username);
 
 		if (searchRecord.isPresent()) {
 
@@ -181,6 +187,7 @@ public class LoginService implements ILoginService {
 	}
 
 	@Override
+	@Transactional
 	public long addaddress(@Valid Address address) {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
@@ -197,9 +204,13 @@ public class LoginService implements ILoginService {
 	}
 
 	@Override
+	@Transactional
 	public String validateUsername(@Valid Login login) {
-		Optional<Login> searchRecord = loginRepository.findByUsername(login.getUsername());
+		
 
+		try {
+			Optional<Login> searchRecord = loginRepository.findByUsername(login.getUsername());
+		
 		if (searchRecord.isPresent()) {
 
 			return "username exists";
@@ -209,7 +220,64 @@ public class LoginService implements ILoginService {
 			return "Success!";
 
 		}
+		}
+		catch(Exception e)
+		{
+			return "error";
+		}
 		
+		
+	}
+
+	@Override
+	@Transactional
+	public long getClientId(Long loginId) {
+		System.out.println("**************************************++++++++++++++++++++++++");
+		 
+		Integer i = (int) (long) loginId;
+		
+		//Long i = new Long(loginId);
+		Optional<Client> searchRecord = clientRepository.getByClientLoginId(i);
+
+		
+
+			Client client = searchRecord.get();
+			
+			return client.getClientId();
+
+		
+		
+	}
+
+	@Override
+	@Transactional
+	public String checkedLocked( String username) {
+		
+		try {
+			Optional<Login> searchRecord = loginRepository.findByUsername(username);
+			
+			System.out.println("Inside Checked Locked*******************************************"+username);
+		
+		if (searchRecord.isPresent()) {
+
+			if(searchRecord.get().getIsLocked().equals("YES"))
+			{
+				return "User is Locked";
+			}
+			else return "notlocked";
+			
+			
+
+		} else {
+
+			return "User Doesn't Exist";
+
+		}
+		}
+		catch(Exception e)
+		{
+			return "error";
+		}
 	}
 
 }
