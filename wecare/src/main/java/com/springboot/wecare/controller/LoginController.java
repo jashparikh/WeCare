@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.wecare.model.Address;
+import com.springboot.wecare.model.Client;
 import com.springboot.wecare.model.Login;
 import com.springboot.wecare.service.ILoginService;
 
@@ -73,9 +75,9 @@ public class LoginController {
 	}
 
 	@CrossOrigin
-	@PutMapping("/lockUser")
+	@PostMapping("/lockUser")
 	public String lockUser(@RequestBody @Valid Login login) {
-		String response = loginService.lockUser(login.getLoginId());
+		String response = loginService.lockUser(login.getUsername());
 
 		return response;
 	}
@@ -89,11 +91,33 @@ public class LoginController {
 	}
 	
 	@CrossOrigin
+	@PostMapping("/checkedLocked")
+	public String checkedLocked(@RequestBody @Valid Login login) {
+		
+		return loginService.checkedLocked(login.getUsername());
+
+	
+	}
+	
+	@CrossOrigin
 	@PostMapping("/validateUsername")
 	public String validateUsername(@RequestBody @Valid Login login) {
 		System.out.println("*************************" + login + "**************************************");
 
 		return loginService.validateUsername(login);
 	}
+	
+	@CrossOrigin
+	@GetMapping("/getClientId")
+	public long getClientId(@RequestParam @Valid Long loginId) {
+		
+		System.out.println(loginId + "**************************************");
+
+		System.out.println("Get all data..");
+		long clientId=loginService.getClientId(loginId);
+
+		return clientId;
+	}
+	
 
 }
