@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity  //annotation for table class this class is a table
-@Table(name = "Caregiver")
+@Table(name = "caregiver")
 public class Caregiver {	
 
 	@Id
