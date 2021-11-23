@@ -3,7 +3,7 @@ CREATE TABLE wecare.caregiver (
  `caregiver_name` varchar(255) DEFAULT NULL,
  `caregiver_experience` varchar(255) DEFAULT NULL,
  `caregiver_specialization` varchar(255) DEFAULT 19000101,
- `caregiver_about` int(11) DEFAULT NULL,
+ `caregiver_about` varchar(14) DEFAULT NULL,
  `caregiver_email` varchar(14) DEFAULT NULL,
  `caregiver_review` varchar(14) DEFAULT NULL,
  `caregiver_dob` varchar(14) DEFAULT NULL,
