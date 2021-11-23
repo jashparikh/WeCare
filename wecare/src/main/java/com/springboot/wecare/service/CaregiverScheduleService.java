@@ -47,13 +47,13 @@ public class CaregiverScheduleService implements ICaregiverScheduleService {
 		return ok;
 	}
 
-	public List<Caregiver> findAvailableFor(LocalDate date, int startTime, int endTime){
+	public List<Caregiver> findAvailableFor(String date, int startTime, int endTime){
 		List<CaregiverSchedule> allCgSch = getAllEmployeeSchedules();
 		List<Caregiver> cgList = new ArrayList<Caregiver>();
 		for (CaregiverSchedule cg : allCgSch) {
 			if (cg.getDate()==date && cg.getStartTime()<startTime && cg.getEndTime() > endTime) {
 				//condition to check that they don't already have an appointment:
-				for (Appointment apt : getAllAptFor(date, cg.getCaregiverid())) { //manually checking that 
+				for (Appointment apt : getAllAptFor(LocalDate.parse(date), cg.getCaregiverid())) { //manually checking that 
 					//this new apt would not coincide with an already existing apt
 					if (!((apt.getAppointmentStartTime()>= startTime && apt.getAppointmentStartTime()<=endTime)||
 					(apt.getAppointmentEndTime()>= startTime && apt.getAppointmentEndTime()<=endTime))) {

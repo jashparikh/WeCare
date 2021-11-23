@@ -61,13 +61,13 @@ public class ClientScheduleService implements IClientScheduleService{
 			for (LocalDateTime apt : neededAptDates) {
 				int startTime = apt.getHour()*100+apt.getMinute();
 				int endTime = apt.plusMinutes(length).getHour()*100+apt.plusMinutes(length).getMinute();
-				List<Caregiver> available = css.findAvailableFor(apt.toLocalDate(), startTime, endTime);
+				List<Caregiver> available = css.findAvailableFor(apt.toLocalDate().toString(), startTime, endTime);
 				
 				while (available.isEmpty()){
 					apt.plusMinutes(30);
 					startTime = apt.getHour()*100+apt.getMinute();
 					endTime = apt.plusMinutes(length).getHour()*100+apt.plusMinutes(length).getMinute();
-					available = css.findAvailableFor(apt.toLocalDate(), startTime, endTime);		
+					available = css.findAvailableFor(apt.toLocalDate().toString(), startTime, endTime);		
 				}
 				// next line randomly assigns a caregiver. will need to add the part where it actually asks the CGmanager to confirm
 				Random random = new Random();

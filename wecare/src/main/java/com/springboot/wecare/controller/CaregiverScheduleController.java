@@ -1,6 +1,5 @@
 package com.springboot.wecare.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.wecare.model.Caregiver;
 import com.springboot.wecare.model.CaregiverSchedule;
 import com.springboot.wecare.service.ICaregiverScheduleService;
-import com.springboot.wecare.service.ICaregiverService;
 
 
 @RestController
@@ -48,7 +46,7 @@ public class CaregiverScheduleController {
 
 	@CrossOrigin
 	@PutMapping("/view all available caregivers for given time")
-	public List<Caregiver> viewCgbyTime(@RequestParam @Valid LocalDate date, int startTime, int endTime) {
+	public List<Caregiver> viewCgbyTime(@RequestParam @Valid String date, int startTime, int endTime) {
 		return caregiverScheduleService.findAvailableFor(date, startTime, endTime);
 	}
 	
