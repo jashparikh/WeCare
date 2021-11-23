@@ -41,6 +41,7 @@ public class CaregiverController {
 	@Autowired
 	IqueryService queryService;
 
+	@CrossOrigin
 	@GetMapping("/ViewProfileInfo")
 	public List<Caregiver> getAllCaregivers() {
 		System.out.println("Get all data..");
@@ -48,6 +49,7 @@ public class CaregiverController {
 		return caregiverService.getAll();
 	}
 		
+	@CrossOrigin
 	@GetMapping("/CaregiverInfo")
 	public String CaregiverInfo(@RequestParam @Valid long caregiverid) {
 		System.out.println("Get specific caregiver");
