@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.wecare.model.Address;
+import com.springboot.wecare.model.Caregiver;
 import com.springboot.wecare.model.Client;
 import com.springboot.wecare.model.Login;
 import com.springboot.wecare.repository.AddressRepository;
+import com.springboot.wecare.repository.CaregiverRepository;
 import com.springboot.wecare.repository.ClientRepository;
 import com.springboot.wecare.repository.LoginRepository;
 
@@ -26,6 +28,9 @@ public class LoginService implements ILoginService {
 	
 	@Autowired
 	ClientRepository clientRepository;
+	
+	@Autowired
+	CaregiverRepository caregiverRepository;
 
 	@Override
 	@Transactional
@@ -278,6 +283,23 @@ public class LoginService implements ILoginService {
 		{
 			return "error";
 		}
+	}
+
+	@Override
+	@Transactional
+	public long getCaregiverId(Long loginId) {
+		System.out.println("**************************************++++++++++++++++++++++++");
+		 
+		Integer i = (int) (long) loginId;
+		
+		//Long i = new Long(loginId);
+		Optional<Caregiver> searchRecord = caregiverRepository.getByLoginId(i);
+
+		
+
+			Caregiver caregiver = searchRecord.get();
+			
+			return caregiver.getCaregiverid();
 	}
 
 }

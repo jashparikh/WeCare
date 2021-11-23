@@ -1,5 +1,6 @@
 package com.springboot.wecare.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Optional;
@@ -127,4 +128,28 @@ public class AppointmentService implements IAppointmentService {
 		return null;
 	}
 
-}
+	@Override
+	@Transactional
+	public List<Appointment> getAppointmentsbyId(long id) {
+		// TODO Auto-generated method stub
+		List<Appointment> appointmentList = new ArrayList();
+		List<Appointment> finalAppointmentList = new ArrayList();
+		appointmentList=appointmentRepository.findAll();
+		
+		
+		for(Appointment a:appointmentList )
+		{
+			if(a.getClientID()==id) {
+				
+				finalAppointmentList.add(a);
+				
+			}
+		}
+		
+		return finalAppointmentList;
+	}
+	
+	}
+
+
+

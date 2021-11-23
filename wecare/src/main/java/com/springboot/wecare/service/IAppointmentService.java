@@ -23,4 +23,6 @@ public interface IAppointmentService {
 
 	public String approveOrDenyAppointment(Long appointmentId, Long clientId);
 
+	public List<Appointment> getAppointmentsbyId(long id);
+
 }

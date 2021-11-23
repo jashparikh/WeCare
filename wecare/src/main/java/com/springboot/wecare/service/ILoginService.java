@@ -29,4 +29,6 @@ public interface ILoginService {
 
 	String checkedLocked( String username);
 
+	long getCaregiverId( Long loginId);
+
 }
