@@ -10,5 +10,7 @@ import com.springboot.wecare.model.Client;
 
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client, Long> { //<> define class and data type of primary key
+public interface ClientRepository extends JpaRepository<Client, Long> {
+
+	Optional<Client> getByClientLoginId(int i); //<> define class and data type of primary key
 }
