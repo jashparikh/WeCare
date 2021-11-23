@@ -119,5 +119,17 @@ public class LoginController {
 		return clientId;
 	}
 	
+	@CrossOrigin
+	@GetMapping("/getCaregiverId")
+	public long getCaregiverId(@RequestParam @Valid Long loginId) {
+		
+		System.out.println(loginId + "**************************************");
+
+		System.out.println("Get all data..");
+		long clientId=loginService.getCaregiverId(loginId);
+
+		return clientId;
+	}
+	
 
 }
