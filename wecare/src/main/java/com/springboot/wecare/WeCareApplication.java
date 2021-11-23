@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@ComponentScan(basePackages = { "com.springboot.nursingproject.*" })
+@ComponentScan(basePackages = { "com.springboot.wecare.*" })
 public class WeCareApplication {
 
 	public static void main(String[] args) {
