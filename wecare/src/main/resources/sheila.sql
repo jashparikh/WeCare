@@ -23,12 +23,15 @@ CREATE TABLE wecare.cli (
  `eircode` varchar(255) default null,
  PRIMARY KEY (`addressId`)
  );
+
  
- create table wecare.CaregiverSchedule (
-`shiftId` int(11) not null auto_increment,
+drop table wecare.caregiverschedule;
+
+ create table wecare.caregiver_schedule (
+`shift_id` int(11) not null auto_increment,
 `caregiver_id` int(11) default null,
-`date` date default null,
-`startTime` int(11) default 0,
-`endTime` int(11) default 0,
-PRIMARY KEY (`shiftId`)
- )
+`date` varchar(255) default null,
+`start_time` int(11) default 0,
+`end_time` int(11) default 0,
+PRIMARY KEY (`shift_id`)
+ );

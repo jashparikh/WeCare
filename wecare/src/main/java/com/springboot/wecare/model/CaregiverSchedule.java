@@ -6,14 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDate;
 
 @Entity  //annotation for table class this class is a table
-@Table(name = "CaregiverSchedule")
+@Table(name = "caregiver_schedule")
 
 public class CaregiverSchedule {
 	@Id
-	@Column(name = "shiftId")
+	@Column(name = "shift_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long shiftId;
 	
@@ -21,12 +20,12 @@ public class CaregiverSchedule {
 	private long caregiverid;
 
 	@Column(name = "date")
-	private LocalDate date; //format it like 0800, 1530
+	private String date; //format it YYYY-MM-DD
 
-	@Column(name = "startTime")
+	@Column(name = "start_time")
 	private int startTime; //format it like 0800, 1530
 	
-	@Column(name = "endTime")
+	@Column(name = "end_time")
 	private int endTime;
 
 	public long getshiftId() {
@@ -45,11 +44,11 @@ public class CaregiverSchedule {
 		this.caregiverid = caregiverid;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -69,12 +68,16 @@ public class CaregiverSchedule {
 		this.endTime = endTime;
 	}
 
-	public CaregiverSchedule(long shiftId, long caregiverid, LocalDate date, int startTime, int endTime) {
+	public CaregiverSchedule(long shiftId, long caregiverid, String date, int startTime, int endTime) {
 		super();
 		this.shiftId = shiftId;
 		this.caregiverid = caregiverid;
 		this.date = date;
 		this.startTime = startTime;
 		this.endTime = endTime;
-	}	
+	}
+	
+	public void getThings() {
+		return;
+	}
 }
