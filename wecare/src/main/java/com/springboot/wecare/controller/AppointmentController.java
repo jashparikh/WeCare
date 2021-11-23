@@ -43,6 +43,16 @@ public class AppointmentController {
 		String response = appointmentService.updateAppointment(appointment);
 		return response;
 	}
+	
+	@CrossOrigin
+	@GetMapping("/getAppointmentsbyId")
+	public List<Appointment> getAppointmentsbyId(long Id) {
+		System.out.println("Get all data..");
+
+		return appointmentService.getAppointmentsbyId(Id);
+	}
+
+	
 
 	@CrossOrigin
 	@DeleteMapping("/deleteAppointment")
