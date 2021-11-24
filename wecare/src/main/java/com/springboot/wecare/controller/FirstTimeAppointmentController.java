@@ -30,14 +30,18 @@ public class FirstTimeAppointmentController {
 	@CrossOrigin
 	@PostMapping("/addFirstAppointment")
 	public String requestFirstAppointment(@RequestBody @Valid FirstTimeAppointment firstTimeAppointment) {
-		String contact = firstTimeService.requestFirstAppointment(firstTimeAppointment);
-		return contact;
+
+		String res = firstTimeService.requestFirstAppointment(firstTimeAppointment);
+		return res;
+
 	}
 
 	@CrossOrigin
 	@PutMapping("/cancelFirstAppointment")
-	public String cancelFirstAppointment(@RequestBody @Valid FirstTimeAppointment firstTimeAppointment) {
-		String response = firstTimeService.requestFirstAppointment(firstTimeAppointment);
+
+	public String cancelFirstAppointment(@RequestBody @Valid Long firsttimeappointmentId) {
+		String response = firstTimeService.cancelFirstAppointment(firsttimeappointmentId);
+
 		return response;
 	}
 
