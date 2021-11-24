@@ -12,5 +12,6 @@ public interface IClientService {
 	public String viewProfileInfo(long cliId);
 	public String updateProfileInfo(long cliId, Object[] fieldsToUpd) ;
 	public String removeClient(long cliId);
+	public String updateClient( Client client);
 
 }

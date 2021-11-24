@@ -59,6 +59,15 @@ public class ClientController {
 		return appointmentService.requestAppointment(clientid, durationInDays);
 	}
 	
+	@CrossOrigin
+	@PostMapping("/updateClient")
+	public String updateClient(@RequestBody @Valid Client client) {
+		String response = clientService.updateClient(client);
+        return response;
+	}
+
+
+	
 	
 	
 }
