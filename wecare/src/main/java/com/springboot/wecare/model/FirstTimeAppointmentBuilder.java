@@ -10,6 +10,8 @@ public interface FirstTimeAppointmentBuilder {
 	void buildAppointmentFrequency();
 
 	void buildappointmentLength();
+	
+	void buildappointmentStatus();
 
 	FirstTimeAppointment getFirstTimeAppointment();
 }

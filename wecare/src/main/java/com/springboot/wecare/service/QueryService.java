@@ -43,6 +43,7 @@ public class QueryService implements IqueryService {
 
 				updateQuery.setQueryDescription(query.getQueryDescription());
 				updateQuery.setIsQueryAnswered(query.getIsQueryAnswered());
+				updateQuery.setQueryResponse(query.getQueryResponse());
 				updateQuery.setCaregiverID(query.getCaregiverID());
 				updateQuery.setClientID(query.getClientID());
 				updateQuery.setManagerID(query.getManagerID());

@@ -36,6 +36,9 @@ public class FirstTimeAppointmentService implements IFirstTimeAppointmentService
 		first.setAppointmentFrequency(firstappointment.getAppointmentFrequency());
 
 		first.setAppointmentDuration(firstappointment.getAppointmentDuration());
+		
+		first.setAppointmentStatus(firstappointment.getAppointmentStatus());
+
 
 		try {
 			firstTimeAppointmentRepository.save(first);

@@ -12,6 +12,7 @@ public class FirstTimeAppointmentEngineer {
 		this.firstTimeAppointmentBuilder.buildappointmentLength();
 		this.firstTimeAppointmentBuilder.buildAppointmentDuration();
 		this.firstTimeAppointmentBuilder.buildappointmentLength();
+		this.firstTimeAppointmentBuilder.buildappointmentStatus();
 		this.firstTimeAppointmentBuilder.buildClientId();
 		return this.firstTimeAppointmentBuilder.getFirstTimeAppointment();
 	}

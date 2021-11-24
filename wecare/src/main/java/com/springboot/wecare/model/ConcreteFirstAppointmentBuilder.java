@@ -35,8 +35,14 @@ public class ConcreteFirstAppointmentBuilder implements FirstTimeAppointmentBuil
 	}
 
 	@Override
+	public void buildappointmentStatus() {
+		firstTimeAppointment.setAppointmentStatus(firstTimeAppointment.getAppointmentStatus());	
+	}
+	
+	@Override
 	public FirstTimeAppointment getFirstTimeAppointment() {
 		return this.firstTimeAppointment;
 	}
+
 
 }
