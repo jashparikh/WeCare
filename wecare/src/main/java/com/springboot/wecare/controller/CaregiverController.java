@@ -51,7 +51,7 @@ public class CaregiverController {
 		
 	@CrossOrigin
 	@GetMapping("/CaregiverInfo")
-	public String CaregiverInfo(@RequestParam @Valid long caregiverid) {
+	public Caregiver CaregiverInfo(@RequestParam @Valid long caregiverid) {
 		System.out.println("Get specific caregiver");
 
 		return caregiverService.caregiverInfo(caregiverid);

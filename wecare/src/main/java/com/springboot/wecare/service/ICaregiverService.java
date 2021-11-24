@@ -23,7 +23,7 @@ public interface ICaregiverService {
 	
 	//public String login(Caregiver caregiver); 
 	
-    public String caregiverInfo(long caregiverid);
+    public Caregiver caregiverInfo(long caregiverid);
     
     
 	
