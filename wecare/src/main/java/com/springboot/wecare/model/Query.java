@@ -18,6 +18,9 @@ public class Query {
 	@Column(name = "query_description")
 	private String queryDescription;
 
+	@Column(name = "query_response")
+	private String queryResponse;
+
 	@Column(name = "query_answered")
 	private Boolean isQueryAnswered;
 
@@ -34,11 +37,12 @@ public class Query {
 		super();
 	}
 
-	public Query(Long queryId, String queryDescription, Boolean isQueryAnswered, int clientID, int caregiverID,
-			int managerID) {
+	public Query(Long queryId, String queryDescription, String queryResponse, Boolean isQueryAnswered, int clientID,
+			int caregiverID, int managerID) {
 		super();
 		this.queryId = queryId;
 		this.queryDescription = queryDescription;
+		this.queryResponse = queryResponse;
 		this.isQueryAnswered = isQueryAnswered;
 		this.clientID = clientID;
 		this.caregiverID = caregiverID;
@@ -59,6 +63,14 @@ public class Query {
 
 	public void setQueryDescription(String queryDescription) {
 		this.queryDescription = queryDescription;
+	}
+
+	public String getQueryResponse() {
+		return queryResponse;
+	}
+
+	public void setQueryResponse(String queryResponse) {
+		this.queryResponse = queryResponse;
 	}
 
 	public Boolean getIsQueryAnswered() {
@@ -95,9 +107,9 @@ public class Query {
 
 	@Override
 	public String toString() {
-		return "Query [queryId=" + queryId + ", queryDescription=" + queryDescription + ", isQueryAnswered="
-				+ isQueryAnswered + ", clientID=" + clientID + ", caregiverID=" + caregiverID + ", managerID="
-				+ managerID + "]";
+		return "Query [queryId=" + queryId + ", queryDescription=" + queryDescription + ", queryResponse="
+				+ queryResponse + ", isQueryAnswered=" + isQueryAnswered + ", clientID=" + clientID + ", caregiverID="
+				+ caregiverID + ", managerID=" + managerID + "]";
 	}
 
 }
