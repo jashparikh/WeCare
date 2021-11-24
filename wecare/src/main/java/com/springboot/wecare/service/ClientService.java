@@ -81,5 +81,33 @@ public class ClientService implements IClientService {
 
 		return ("Successfully removed");	
 	}
+	
+	@Override
+	public String updateClient(Client client) {
+Optional <Client> searchRecord = clientRepository.findById(client.getClientId());
+		
+		if(searchRecord.isPresent()) {
+			try {
+				
+				Client updateClient = searchRecord.get();
+				
+				updateClient.setClientEmail(client.getClientEmail());
+				updateClient.setClientFName(client.getClientFName());
+				updateClient.setClientSName(client.getClientSName());
+				updateClient.setClientWeight(client.getClientWeight());
+				updateClient.setClientNumber(client.getClientNumber());
+				
+				clientRepository.save(updateClient);
+				
+			}catch (Exception e) {
+				return e.getMessage();
+			}
+		}else {
+			return "client Doesn't Exist";
+	} 
+		return "Client Updated";
+	}
+
 
 }
+
