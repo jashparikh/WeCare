@@ -21,8 +21,15 @@ public class ClientScheduleService implements IClientScheduleService{
 	
 	@Autowired
 	ClientScheduleRepository clientScheduleRepository;
+	
+	@Autowired
 	FirstTimeAppointmentRepository firstTimeAptRep;
+	
+	@Autowired
 	AppointmentRepository appointmentRep;
+	
+	@Autowired
+	ICaregiverScheduleService css;
 	
 	@Override
 	public List<Long> getClientSchedule(Long clientId) {
@@ -57,7 +64,7 @@ public class ClientScheduleService implements IClientScheduleService{
 				neededAptDates.add(tempDate);
 				tempDate = tempDate.plusHours((long) freq*24);
 			}
-			CaregiverScheduleService css = new CaregiverScheduleService();
+			//CaregiverScheduleService css = new CaregiverScheduleService();
 			for (LocalDateTime apt : neededAptDates) {
 				int startTime = apt.getHour()*100+apt.getMinute();
 				int endTime = apt.plusMinutes(length).getHour()*100+apt.plusMinutes(length).getMinute();
