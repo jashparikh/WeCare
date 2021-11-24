@@ -81,16 +81,16 @@ public class CaregiverService implements ICaregiverService {
 	}
 
 	@Override
-	public String caregiverInfo(long caregiverid) {	
+	public Caregiver caregiverInfo(long caregiverid) {	
 	
 			try {
 				Optional<Caregiver> searchrecord = caregiverRepository.findByCaregiverid(caregiverid);
 				Caregiver RetrieveCaregiver= searchrecord.get();
-				return RetrieveCaregiver.toString();
+				return RetrieveCaregiver;
 				
 				
 			}catch (Exception e) {
-				return e.getMessage();
+				return null;
 			} 
 			
 			
