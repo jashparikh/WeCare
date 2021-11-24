@@ -28,13 +28,22 @@ public class ClientService implements IClientService {
 		return "Success!";
 	}
 	
-	public String viewProfileInfo(long id) {
+    public Client viewProfileInfo(long id) {
+		
+		Client client=new Client();
 		try {
-			return clientRepository.findById(id).get().toString();
-		} catch (Exception e) {
-			return e.getMessage();
+			Optional <Client> searchRecord = clientRepository.findById(id);
+			 client = searchRecord.get();
 		}
+		catch(Exception e)
+		{
+			client=null;
+			return client;
 		}
+			
+		return client;
+		}
+
 	
 	public String updateProfileInfo(long client, Object[] fieldsToUpd) {
 		Optional<Client> clien = clientRepository.findById(client);
@@ -82,31 +91,32 @@ public class ClientService implements IClientService {
 		return ("Successfully removed");	
 	}
 	
-	@Override
 	public String updateClient(Client client) {
-Optional <Client> searchRecord = clientRepository.findById(client.getClientId());
-		
-		if(searchRecord.isPresent()) {
-			try {
+		Optional <Client> searchRecord = clientRepository.findById(client.getClientId());
 				
-				Client updateClient = searchRecord.get();
-				
-				updateClient.setClientEmail(client.getClientEmail());
-				updateClient.setClientFName(client.getClientFName());
-				updateClient.setClientSName(client.getClientSName());
-				updateClient.setClientWeight(client.getClientWeight());
-				updateClient.setClientNumber(client.getClientNumber());
-				
-				clientRepository.save(updateClient);
-				
-			}catch (Exception e) {
-				return e.getMessage();
+				if(searchRecord.isPresent()) {
+					try {
+						
+						Client updateClient = searchRecord.get();
+						
+						updateClient.setClientEmail(client.getClientEmail());
+						updateClient.setClientFName(client.getClientFName());
+						updateClient.setClientSName(client.getClientSName());
+						updateClient.setClientWeight(client.getClientWeight());
+						updateClient.setClientNumber(client.getClientNumber());
+						
+						clientRepository.save(updateClient);
+						
+					}catch (Exception e) {
+						return e.getMessage();
+					}
+				}else {
+					return "client Doesn't Exist";
+			} 
+				return "Client Updated";
 			}
-		}else {
-			return "client Doesn't Exist";
-	} 
-		return "Client Updated";
-	}
+
+
 
 
 }

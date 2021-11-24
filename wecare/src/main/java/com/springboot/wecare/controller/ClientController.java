@@ -22,6 +22,7 @@ public class ClientController {
 	IClientService clientService; //reference of clientservice
 	IAppointmentService appointmentService;
 
+	@CrossOrigin
 	@GetMapping("/allClient")
 	public List<Client> getAllClients() {
 		System.out.println("Getting all data..");
@@ -29,10 +30,13 @@ public class ClientController {
 		return clientService.getAll();
 	}
 
+	@CrossOrigin
 	@GetMapping("/clientProfile")
-	public String seeProfile(@RequestParam @Valid long clientid) {
+	public Client seeProfile(@RequestParam @Valid long clientid) {
 		return clientService.viewProfileInfo(clientid);
 	}
+
+
 	
 	@CrossOrigin //transferring from web browser to application 
 	@PostMapping("/registerClient") //create retrieve update and delete
