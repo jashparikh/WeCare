@@ -20,6 +20,7 @@ public class FirstTimeAppointmentController {
 	@Autowired
 	IFirstTimeAppointmentService firstTimeService;
 
+	@CrossOrigin
 	@GetMapping("/allFirstTimeAppointments")
 	public List<FirstTimeAppointment> getAllFirstTimeAppointments() {
 		System.out.println("Get all data..");
