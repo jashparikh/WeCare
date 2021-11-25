@@ -107,8 +107,9 @@
 		</dependency>
 
 	</dependencies>
-
-<plugin>
+	<build>
+		<plugins>
+			<plugin>
 	<groupId>org.jacoco</groupId>
 	<artifactId>jacoco-maven-plugin</artifactId>
 	<version>0.8.7</version>
@@ -128,8 +129,6 @@
 		</execution>
 	</executions>
 </plugin>
-	<build>
-		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
