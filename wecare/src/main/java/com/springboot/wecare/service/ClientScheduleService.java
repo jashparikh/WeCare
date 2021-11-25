@@ -23,7 +23,10 @@ public class ClientScheduleService implements IClientScheduleService{
 	ClientScheduleRepository clientScheduleRepository;
 	
 	@Autowired
-	FirstTimeAppointmentRepository firstTimeAptRep;
+	FirstTimeAppointmentRepository ftaRepository;
+	
+	@Autowired
+	IFirstTimeAppointmentService firstTimeAptSer;
 	
 	@Autowired
 	AppointmentRepository appointmentRep;
@@ -49,7 +52,9 @@ public class ClientScheduleService implements IClientScheduleService{
 	}
 
 	public List<Appointment> generateClientSchedule(long firstAptId){
-			FirstTimeAppointment firstApt = firstTimeAptRep.getById(firstAptId);
+
+			FirstTimeAppointment firstApt = ftaRepository.getById(firstAptId);
+			
 			List<Appointment> listFinalApt = new ArrayList<Appointment>();
 			int dur = Integer.parseInt(firstApt.getAppointmentDuration()); //number of days needed
 			double freq = firstApt.getAppointmentFrequency(); //# per week, if >7 then one or multiple days will have two apt 
@@ -60,9 +65,9 @@ public class ClientScheduleService implements IClientScheduleService{
 			LocalDateTime endDate = tempDate.plusDays(dur);
 			
 			List<LocalDateTime> neededAptDates = new ArrayList<LocalDateTime>();
-			while (tempDate.isBefore(endDate)) {
+			while (tempDate.isBefore(endDate)||tempDate.equals(endDate)) {
 				neededAptDates.add(tempDate);
-				tempDate = tempDate.plusHours((long) freq*24);
+				tempDate = tempDate.plusHours(Math.round(freq*24));
 			}
 			//CaregiverScheduleService css = new CaregiverScheduleService();
 			for (LocalDateTime apt : neededAptDates) {
@@ -71,7 +76,7 @@ public class ClientScheduleService implements IClientScheduleService{
 				List<Caregiver> available = css.findAvailableFor(apt.toLocalDate().toString(), startTime, endTime);
 				
 				while (available.isEmpty()){
-					apt.plusMinutes(30);
+					apt = apt.plusMinutes(30);
 					startTime = apt.getHour()*100+apt.getMinute();
 					endTime = apt.plusMinutes(length).getHour()*100+apt.plusMinutes(length).getMinute();
 					available = css.findAvailableFor(apt.toLocalDate().toString(), startTime, endTime);		
@@ -89,7 +94,7 @@ public class ClientScheduleService implements IClientScheduleService{
 				listFinalApt.add(appt);
 			}
 			
-		return listFinalApt;
+		return null;
 	}
 
 }
