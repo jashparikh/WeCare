@@ -133,4 +133,4 @@ jobs:
           environment_name: Testwecare-env
           version_label: ${{github.SHA}}
           region: ap-south-1
-          deployment_package: nursingproject-0.0.1-SNAPSHOT.jar
+          deployment_package: nursingproject-0.0.1-SNAPSHOT.jar.original
