@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,9 +29,10 @@ public class CaregiverManagerController {
 	@Autowired
 	IAppointmentService appointmentService;
 
-	@Autowired // no need to add confirmations or properties for this class
-	IClientService clientService; // reference of clientservice
+	@Autowired
+	IClientService clientService;
 
+	@CrossOrigin
 	@GetMapping("/getManagers")
 	public List<CaregiverManager> getManagers() {
 
@@ -51,6 +53,38 @@ public class CaregiverManagerController {
 		String response = appointmentService.addAppointment(null);
 
 		return response;
+	}
+
+	@CrossOrigin
+	@PutMapping("/queryResponse")
+	public String queryResponse(@RequestParam @Valid String response) {
+		return caregiverManagerService.queryResponse(response);
+	}
+
+	@CrossOrigin
+	@PostMapping("/updateManager")
+	public String updateManager(@RequestBody @Valid CaregiverManager manager) {
+		String response = caregiverManagerService.updateManager(manager);
+		return response;
+	}
+
+	@CrossOrigin
+	@DeleteMapping("/deleteManager")
+	public String deleteManager(@RequestParam @Valid long managerId) {
+		return caregiverManagerService.deleteManager(managerId);
+	}
+
+	@CrossOrigin
+	@PostMapping("/addManager")
+	public String addManager(@RequestBody @Valid CaregiverManager manager) {
+		String response = caregiverManagerService.addManager(manager);
+		return response;
+	}
+
+	@CrossOrigin
+	@GetMapping("/getManagerById")
+	public CaregiverManager getManagerById(@RequestParam @Valid long managerId) {
+		return caregiverManagerService.getManagerById(managerId);
 	}
 
 }
