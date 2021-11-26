@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FirstTimeAppointment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.model</a> &gt; <span class="el_source">FirstTimeAppointment.java</span></div><h1>FirstTimeAppointment.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;firstappointment&quot;)
+public class FirstTimeAppointment {
+
+	@Id
+	@Column(name = &quot;firstappointment_id&quot;)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long firstappointmentId;
+
+	@Column(name = &quot;client_id&quot;)
+	private Long clientId;
+
+	@Column(name = &quot;appointment_duration&quot;)
+	private String appointmentDuration;
+
+	@Column(name = &quot;appointmentstatus&quot;)
+	private String appointmentStatus;
+	
+	@Column(name = &quot;appointmentfrequency&quot;)
+	private Double appointmentFrequency;
+
+	@Column(name = &quot;appointmentlength&quot;)
+	private int appointmentLength;
+
+	public FirstTimeAppointment() {
+<span class="nc" id="L35">		super();</span>
+<span class="nc" id="L36">	}</span>
+
+	public FirstTimeAppointment(Long firstappointmentId, Long clientId, String appointmentDuration,
+			String appointmentStatus, Double appointmentFrequency, int appointmentLength) {
+<span class="nc" id="L40">		super();</span>
+<span class="nc" id="L41">		this.firstappointmentId = firstappointmentId;</span>
+<span class="nc" id="L42">		this.clientId = clientId;</span>
+<span class="nc" id="L43">		this.appointmentDuration = appointmentDuration;</span>
+<span class="nc" id="L44">		this.appointmentStatus = appointmentStatus;</span>
+<span class="nc" id="L45">		this.appointmentFrequency = appointmentFrequency;</span>
+<span class="nc" id="L46">		this.appointmentLength = appointmentLength;</span>
+<span class="nc" id="L47">	}</span>
+
+	public Long getFirstappointmentId() {
+<span class="nc" id="L50">		return firstappointmentId;</span>
+	}
+
+	public void setFirstappointmentId(Long firstappointmentId) {
+<span class="nc" id="L54">		this.firstappointmentId = firstappointmentId;</span>
+<span class="nc" id="L55">	}</span>
+
+	public Long getClientId() {
+<span class="nc" id="L58">		return clientId;</span>
+	}
+
+	public void setClientId(Long clientId) {
+<span class="nc" id="L62">		this.clientId = clientId;</span>
+<span class="nc" id="L63">	}</span>
+
+	public String getAppointmentDuration() {
+<span class="nc" id="L66">		return appointmentDuration;</span>
+	}
+
+	public void setAppointmentDuration(String appointmentDuration) {
+<span class="nc" id="L70">		this.appointmentDuration = appointmentDuration;</span>
+<span class="nc" id="L71">	}</span>
+
+	public String getAppointmentStatus() {
+<span class="nc" id="L74">		return appointmentStatus;</span>
+	}
+
+	public void setAppointmentStatus(String appointmentStatus) {
+<span class="nc" id="L78">		this.appointmentStatus = appointmentStatus;</span>
+<span class="nc" id="L79">	}</span>
+
+	public Double getAppointmentFrequency() {
+<span class="nc" id="L82">		return appointmentFrequency;</span>
+	}
+
+	public void setAppointmentFrequency(Double appointmentFrequency) {
+<span class="nc" id="L86">		this.appointmentFrequency = appointmentFrequency;</span>
+<span class="nc" id="L87">	}</span>
+
+	public int getAppointmentLength() {
+<span class="nc" id="L90">		return appointmentLength;</span>
+	}
+
+	public void setAppointmentLength(int appointmentLength) {
+<span class="nc" id="L94">		this.appointmentLength = appointmentLength;</span>
+<span class="nc" id="L95">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L99">		return &quot;FirstTimeAppointment [firstappointmentId=&quot; + firstappointmentId + &quot;, clientId=&quot; + clientId</span>
+				+ &quot;, appointmentDuration=&quot; + appointmentDuration + &quot;, appointmentStatus=&quot; + appointmentStatus
+				+ &quot;, appointmentFrequency=&quot; + appointmentFrequency + &quot;, appointmentLength=&quot; + appointmentLength + &quot;]&quot;;
+	}
+
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

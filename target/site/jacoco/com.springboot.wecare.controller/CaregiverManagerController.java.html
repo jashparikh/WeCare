@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaregiverManagerController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.controller</a> &gt; <span class="el_source">CaregiverManagerController.java</span></div><h1>CaregiverManagerController.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.springboot.wecare.model.CaregiverManager;
+import com.springboot.wecare.model.Login;
+import com.springboot.wecare.service.IAppointmentService;
+import com.springboot.wecare.service.ICaregiverManagerService;
+import com.springboot.wecare.service.IClientService;
+
+@RestController
+<span class="nc" id="L24">public class CaregiverManagerController {</span>
+
+	@Autowired
+	ICaregiverManagerService caregiverManagerService;
+
+	@Autowired
+	IAppointmentService appointmentService;
+
+	@Autowired
+	IClientService clientService;
+
+	@CrossOrigin
+	@GetMapping(&quot;/getManagers&quot;)
+	public List&lt;CaregiverManager&gt; getManagers() {
+
+<span class="nc" id="L39">		System.out.println(&quot;Get all data..&quot;);</span>
+
+<span class="nc" id="L41">		return caregiverManagerService.getManagers();</span>
+	}
+
+	@CrossOrigin
+	@DeleteMapping(&quot;/deleteClient&quot;)
+	public String deleteClient(@RequestParam @Valid long clientId) {
+<span class="nc" id="L47">		return clientService.removeClient(clientId);</span>
+	}
+
+	@CrossOrigin
+	@PutMapping(&quot;/cancelClientappointment&quot;)
+	public String cancelClientAppointment(@RequestBody @Valid Login login) {
+<span class="nc" id="L53">		String response = appointmentService.addAppointment(null);</span>
+
+<span class="nc" id="L55">		return response;</span>
+	}
+
+	@CrossOrigin
+	@PutMapping(&quot;/queryResponse&quot;)
+	public String queryResponse(@RequestParam @Valid String response) {
+<span class="nc" id="L61">		return caregiverManagerService.queryResponse(response);</span>
+	}
+
+	@CrossOrigin
+	@PostMapping(&quot;/updateManager&quot;)
+	public String updateManager(@RequestBody @Valid CaregiverManager manager) {
+<span class="nc" id="L67">		String response = caregiverManagerService.updateManager(manager);</span>
+<span class="nc" id="L68">		return response;</span>
+	}
+
+	@CrossOrigin
+	@DeleteMapping(&quot;/deleteManager&quot;)
+	public String deleteManager(@RequestParam @Valid long managerId) {
+<span class="nc" id="L74">		return caregiverManagerService.deleteManager(managerId);</span>
+	}
+
+	@CrossOrigin
+	@PostMapping(&quot;/addManager&quot;)
+	public String addManager(@RequestBody @Valid CaregiverManager manager) {
+<span class="nc" id="L80">		String response = caregiverManagerService.addManager(manager);</span>
+<span class="nc" id="L81">		return response;</span>
+	}
+
+	@CrossOrigin
+	@GetMapping(&quot;/getManagerById&quot;)
+	public CaregiverManager getManagerById(@RequestParam @Valid long managerId) {
+<span class="nc" id="L87">		return caregiverManagerService.getManagerById(managerId);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

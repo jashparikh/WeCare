@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.controller</a> &gt; <span class="el_source">LoginController.java</span></div><h1>LoginController.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.springboot.wecare.model.Address;
+import com.springboot.wecare.model.Client;
+import com.springboot.wecare.model.Login;
+import com.springboot.wecare.service.ILoginService;
+
+@RestController
+<span class="nc" id="L21">public class LoginController {</span>
+
+	@Autowired
+	ILoginService loginService;
+
+	@GetMapping(&quot;/getLoginDetails&quot;)
+	public Login getLoginDetails(Login login) {
+
+<span class="nc" id="L29">		System.out.println(&quot;Get all data..&quot;);</span>
+
+<span class="nc" id="L31">		return loginService.getLoginDetails(login.getLoginId());</span>
+	}
+
+	@CrossOrigin
+	@PostMapping(&quot;/addLogin&quot;)
+	public long addLogin(@RequestBody @Valid Login login) {
+<span class="nc" id="L37">		long loginID = loginService.addLogin(login);</span>
+
+<span class="nc" id="L39">		return loginID;</span>
+	}
+	
+	@CrossOrigin
+	@PostMapping(&quot;/addaddress&quot;)
+	public long addaddress(@RequestBody @Valid Address address) {
+<span class="nc" id="L45">		long addressId = loginService.addaddress(address);</span>
+
+<span class="nc" id="L47">		return addressId;</span>
+	}
+
+	@CrossOrigin
+	@PutMapping(&quot;/updateLoginDetails&quot;)
+	public String updateLoginDetails(@RequestBody @Valid Login login) {
+<span class="nc" id="L53">		String response = loginService.updateLoginDetails(login);</span>
+
+<span class="nc" id="L55">		return response;</span>
+	}
+
+	@CrossOrigin
+	@DeleteMapping(&quot;/deleteLogin&quot;)
+	public String deleteLogin(@RequestBody @Valid Login login) {
+		// System.out.println(&quot;*************************&quot; + login +
+		
+		// &quot;**************************************&quot;);
+<span class="nc" id="L64">		String response = loginService.deleteLogin(login.getLoginId());</span>
+
+<span class="nc" id="L66">		return response;</span>
+	}
+
+	@CrossOrigin
+	@PostMapping(&quot;/validateLogin&quot;)
+	public long validateLogin(@RequestBody @Valid Login login) {
+<span class="nc" id="L72">		System.out.println(&quot;*************************&quot; + login + &quot;**************************************&quot;);</span>
+
+<span class="nc" id="L74">		return loginService.validateLogin(login);</span>
+	}
+
+	@CrossOrigin
+	@PostMapping(&quot;/lockUser&quot;)
+	public String lockUser(@RequestBody @Valid Login login) {
+<span class="nc" id="L80">		String response = loginService.lockUser(login.getUsername());</span>
+
+<span class="nc" id="L82">		return response;</span>
+	}
+
+	@CrossOrigin
+	@PutMapping(&quot;/unlockUser&quot;)
+	public String unlockUser(@RequestBody @Valid Login login) {
+<span class="nc" id="L88">		String response = loginService.unlockUser(login.getLoginId());</span>
+
+<span class="nc" id="L90">		return response;</span>
+	}
+	
+	@CrossOrigin
+	@PostMapping(&quot;/checkedLocked&quot;)
+	public String checkedLocked(@RequestBody @Valid Login login) {
+		
+<span class="nc" id="L97">		return loginService.checkedLocked(login.getUsername());</span>
+
+	
+	}
+	
+	@CrossOrigin
+	@PostMapping(&quot;/validateUsername&quot;)
+	public String validateUsername(@RequestBody @Valid Login login) {
+<span class="nc" id="L105">		System.out.println(&quot;*************************&quot; + login + &quot;**************************************&quot;);</span>
+
+<span class="nc" id="L107">		return loginService.validateUsername(login);</span>
+	}
+	
+	@CrossOrigin
+	@GetMapping(&quot;/getClientId&quot;)
+	public long getClientId(@RequestParam @Valid Long loginId) {
+		
+<span class="nc" id="L114">		System.out.println(loginId + &quot;**************************************&quot;);</span>
+
+<span class="nc" id="L116">		System.out.println(&quot;Get all data..&quot;);</span>
+<span class="nc" id="L117">		long clientId=loginService.getClientId(loginId);</span>
+
+<span class="nc" id="L119">		return clientId;</span>
+	}
+	
+	@CrossOrigin
+	@GetMapping(&quot;/getCaregiverId&quot;)
+	public long getCaregiverId(@RequestParam @Valid Long loginId) {
+		
+<span class="nc" id="L126">		System.out.println(loginId + &quot;**************************************&quot;);</span>
+
+<span class="nc" id="L128">		System.out.println(&quot;Get all data..&quot;);</span>
+<span class="nc" id="L129">		long clientId=loginService.getCaregiverId(loginId);</span>
+
+<span class="nc" id="L131">		return clientId;</span>
+	}
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

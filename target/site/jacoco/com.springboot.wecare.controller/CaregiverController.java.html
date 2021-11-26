@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaregiverController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.controller</a> &gt; <span class="el_source">CaregiverController.java</span></div><h1>CaregiverController.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.springboot.wecare.model.Caregiver;
+import com.springboot.wecare.model.Query;
+import com.springboot.wecare.service.IAppointmentService;
+import com.springboot.wecare.service.ICaregiverService;
+import com.springboot.wecare.service.IClientService;
+import com.springboot.wecare.service.ILoginService;
+import com.springboot.wecare.service.IqueryService;
+
+
+@RestController
+<span class="nc" id="L27">public class CaregiverController {</span>
+    
+	@Autowired
+	IAppointmentService appointmentService;
+	
+	@Autowired
+	ICaregiverService caregiverService;
+	
+	@Autowired
+	ILoginService loginService;
+	
+	@Autowired 
+	IClientService clientService;
+	
+	@Autowired
+	IqueryService queryService;
+
+	@CrossOrigin
+	@GetMapping(&quot;/ViewProfileInfo&quot;)
+	public List&lt;Caregiver&gt; getAllCaregivers() {
+<span class="nc" id="L47">		System.out.println(&quot;Get all data..&quot;);</span>
+
+<span class="nc" id="L49">		return caregiverService.getAll();</span>
+	}
+		
+	@CrossOrigin
+	@GetMapping(&quot;/CaregiverInfo&quot;)
+	public Caregiver CaregiverInfo(@RequestParam @Valid long caregiverid) {
+<span class="nc" id="L55">		System.out.println(&quot;Get specific caregiver&quot;);</span>
+
+<span class="nc" id="L57">		return caregiverService.caregiverInfo(caregiverid);</span>
+	}
+	
+
+	@CrossOrigin
+	@PostMapping(&quot;/addCaregiver&quot;)
+	public String addCaregiver(@RequestBody @Valid Caregiver caregiver) {
+<span class="nc" id="L64">		String contact = caregiverService.addCaregiver(caregiver);</span>
+
+<span class="nc" id="L66">		return contact;</span>
+	}
+
+	@CrossOrigin
+	@PutMapping(&quot;/UpdateProfileInfo&quot;)
+	public String UpdateCaregiver(@RequestBody @Valid Caregiver caregiver) {
+<span class="nc" id="L72">		String response = caregiverService.updateCaregiver(caregiver);</span>
+
+<span class="nc" id="L74">		return response;</span>
+	}
+	
+	
+	@CrossOrigin
+	@DeleteMapping(&quot;/deleteCaregiver&quot;)
+	public String deleteCaregiver(@RequestParam @Valid long caregiverid) {
+<span class="nc" id="L81">		String response = caregiverService.deleteCaregiver(caregiverid);</span>
+
+<span class="nc" id="L83">		return response;</span>
+	}	
+	
+
+	@CrossOrigin
+	@PostMapping(&quot;/addCgQuery&quot;)
+	public String addCgQuery(@RequestBody @Valid Query query) {
+<span class="nc" id="L90">		String contact = queryService.addQuery(query);</span>
+<span class="nc" id="L91">		return contact;</span>
+	}
+	
+	
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

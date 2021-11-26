@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Appointment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.model</a> &gt; <span class="el_source">Appointment.java</span></div><h1>Appointment.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.model;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;appointments&quot;)
+public class Appointment {
+
+	@Id
+	@Column(name = &quot;appointment_id&quot;)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long appointmentId;
+
+	@Column(name = &quot;appointment_date&quot;)
+	private String appointmentDate;
+
+	@Column(name = &quot;appointment_startTime&quot;)
+	private int appointmentStartTime;
+
+	@Column(name = &quot;appointment_endTime&quot;)
+	private int appointmentEndTime;
+
+	@Column(name = &quot;appointment_frequency&quot;)
+	private String appointmentFrequency;
+
+	@Column(name = &quot;appointment_length&quot;)
+	private int appointmentLength;
+
+	@Column(name = &quot;appointment_duration&quot;)
+	private String appointmentDuration;
+
+	@Column(name = &quot;client_id&quot;)
+	private Long clientID;
+
+	@Column(name = &quot;caregiver_id&quot;)
+	private Long caregiverID;
+
+	@Column(name = &quot;manager_id&quot;)
+	private Long managerID;
+
+	@Column(name = &quot;is_confirmed&quot;)
+	private String isConfirmed;
+
+	@Column(name = &quot;schedule_id&quot;)
+	private Long scheduleID;
+
+	public Appointment() {
+<span class="nc" id="L52">		super();</span>
+<span class="nc" id="L53">	}</span>
+
+	public Appointment(Long appointmentId, String appointmentDate, String appointmentFrequency,
+			int appointmentLength, String appointmentDuration, Long clientID, Long caregiverID, Long managerID,
+			String isConfirmed, Long scheduleID) {
+<span class="nc" id="L58">		super();</span>
+<span class="nc" id="L59">		this.appointmentId = appointmentId;</span>
+<span class="nc" id="L60">		this.appointmentDate = appointmentDate;</span>
+<span class="nc" id="L61">		this.appointmentFrequency = appointmentFrequency;</span>
+<span class="nc" id="L62">		this.appointmentLength = appointmentLength;</span>
+<span class="nc" id="L63">		this.appointmentDuration = appointmentDuration;</span>
+<span class="nc" id="L64">		this.clientID = clientID;</span>
+<span class="nc" id="L65">		this.caregiverID = caregiverID;</span>
+<span class="nc" id="L66">		this.managerID = managerID;</span>
+<span class="nc" id="L67">		this.isConfirmed = isConfirmed;</span>
+<span class="nc" id="L68">		this.scheduleID = scheduleID;</span>
+<span class="nc" id="L69">	}</span>
+
+	public Appointment(String appointmentDate, int appointmentStartTime, int appointmentLength, Long clientID,
+			Long caregiverID, String isConfirmed, Long scheduleID) {
+<span class="nc" id="L73">		super();</span>
+<span class="nc" id="L74">		this.appointmentDate = appointmentDate;</span>
+<span class="nc" id="L75">		this.appointmentStartTime = appointmentStartTime;</span>
+<span class="nc" id="L76">		this.appointmentLength = appointmentLength;</span>
+<span class="nc" id="L77">		this.clientID = clientID;</span>
+<span class="nc" id="L78">		this.caregiverID = caregiverID;</span>
+<span class="nc" id="L79">		this.isConfirmed = isConfirmed;</span>
+<span class="nc" id="L80">		this.scheduleID = scheduleID;</span>
+<span class="nc" id="L81">		int endMin = (appointmentStartTime + appointmentLength + 20) % 100;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">		if (endMin &gt;= 60) {</span>
+<span class="nc" id="L83">			this.appointmentEndTime = (appointmentStartTime / 100) * 100 + 100 + endMin % 60;</span>
+		} else {
+<span class="nc" id="L85">			this.appointmentEndTime = appointmentStartTime + appointmentLength + 20;</span>
+		}
+<span class="nc" id="L87">	}</span>
+
+	public Appointment(String String, int length, Long clientId2, long caregiverid2, String string,
+<span class="nc" id="L90">			Long clientScheduleId) {</span>
+<span class="nc" id="L91">	}</span>
+
+	public int getAppointmentStartTime() {
+<span class="nc" id="L94">		return appointmentStartTime;</span>
+	}
+
+	public void setAppointmentStartTime(int appointmentStartTime) {
+<span class="nc" id="L98">		this.appointmentStartTime = appointmentStartTime;</span>
+
+<span class="nc" id="L100">		int endMin = (appointmentStartTime + this.appointmentLength + 20) % 100;</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">		if (endMin &gt;= 60) {</span>
+<span class="nc" id="L102">			this.appointmentEndTime = (appointmentStartTime / 100) * 100 + 100 + endMin % 60;</span>
+		} else {
+<span class="nc" id="L104">			this.appointmentEndTime = appointmentStartTime + this.appointmentLength + 20;</span>
+		}
+<span class="nc" id="L106">	}</span>
+
+	public int getAppointmentEndTime() {
+<span class="nc" id="L109">		return appointmentEndTime;</span>
+	}
+
+	public Long getAppointmentId() {
+<span class="nc" id="L113">		return appointmentId;</span>
+	}
+
+	public void setAppointmentId(Long appointmentId) {
+<span class="nc" id="L117">		this.appointmentId = appointmentId;</span>
+<span class="nc" id="L118">	}</span>
+
+	public String getAppointmentDate() {
+<span class="nc" id="L121">		return appointmentDate;</span>
+	}
+
+	public void setAppointmentDate(String appointmentDate) {
+<span class="nc" id="L125">		this.appointmentDate = appointmentDate;</span>
+<span class="nc" id="L126">	}</span>
+
+	public String getAppointmentFrequency() {
+<span class="nc" id="L129">		return appointmentFrequency;</span>
+	}
+
+	public void setAppointmentFrequency(String appointmentFrequency) {
+<span class="nc" id="L133">		this.appointmentFrequency = appointmentFrequency;</span>
+<span class="nc" id="L134">	}</span>
+
+	public int getAppointmentLength() {
+<span class="nc" id="L137">		return appointmentLength;</span>
+	}
+
+	public void setAppointmentLength(int appointmentLength) {
+<span class="nc" id="L141">		this.appointmentLength = appointmentLength;</span>
+
+<span class="nc" id="L143">		int endMin = (this.appointmentStartTime + appointmentLength + 20) % 100;</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">		if (endMin &gt;= 60) {</span>
+<span class="nc" id="L145">			this.appointmentEndTime = (this.appointmentStartTime / 100) * 100 + 100 + endMin % 60;</span>
+		} else {
+<span class="nc" id="L147">			this.appointmentEndTime = this.appointmentStartTime + appointmentLength + 20;</span>
+		}
+<span class="nc" id="L149">	}</span>
+
+	public String getAppointmentDuration() {
+<span class="nc" id="L152">		return appointmentDuration;</span>
+	}
+
+	public void setAppointmentDuration(String appointmentDuration) {
+<span class="nc" id="L156">		this.appointmentDuration = appointmentDuration;</span>
+<span class="nc" id="L157">	}</span>
+
+	public Long getClientID() {
+<span class="nc" id="L160">		return clientID;</span>
+	}
+
+	public void setClientID(Long clientID) {
+<span class="nc" id="L164">		this.clientID = clientID;</span>
+<span class="nc" id="L165">	}</span>
+
+	public Long getCaregiverID() {
+<span class="nc" id="L168">		return caregiverID;</span>
+	}
+
+	public void setCaregiverID(Long caregiverID) {
+<span class="nc" id="L172">		this.caregiverID = caregiverID;</span>
+<span class="nc" id="L173">	}</span>
+
+	public long getManagerID() {
+<span class="nc" id="L176">		return managerID;</span>
+	}
+
+	public void setManagerID(Long managerID) {
+<span class="nc" id="L180">		this.managerID = managerID;</span>
+<span class="nc" id="L181">	}</span>
+
+	public String getIsConfirmed() {
+<span class="nc" id="L184">		return isConfirmed;</span>
+	}
+
+	public void setIsConfirmed(String isConfirmed) {
+<span class="nc" id="L188">		this.isConfirmed = isConfirmed;</span>
+<span class="nc" id="L189">	}</span>
+
+	public Long getScheduleID() {
+<span class="nc" id="L192">		return scheduleID;</span>
+	}
+
+	public void setScheduleID(Long scheduleID) {
+<span class="nc" id="L196">		this.scheduleID = scheduleID;</span>
+<span class="nc" id="L197">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L201">		return &quot;Appointment [appointmentId=&quot; + appointmentId + &quot;, appointmentDate=&quot; + appointmentDate</span>
+				+ &quot;, appointmentFrequency=&quot; + appointmentFrequency + &quot;, appointmentLength=&quot; + appointmentLength
+				+ &quot;, appointmentDuration=&quot; + appointmentDuration + &quot;, clientID=&quot; + clientID + &quot;, caregiverID=&quot;
+				+ caregiverID + &quot;, managerID=&quot; + managerID + &quot;, isConfirmed=&quot; + isConfirmed + &quot;, scheduleID=&quot;
+				+ scheduleID + &quot;]&quot;;
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QueryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.controller</a> &gt; <span class="el_source">QueryController.java</span></div><h1>QueryController.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import com.springboot.wecare.model.Query;
+import com.springboot.wecare.service.IqueryService;
+
+@RestController
+<span class="nc" id="L20">public class QueryController {</span>
+
+	@Autowired
+	IqueryService queryService;
+
+	@GetMapping(&quot;/allQueries&quot;)
+	public List&lt;Query&gt; getAllQueries() {
+<span class="nc" id="L27">		System.out.println(&quot;Get all data..&quot;);</span>
+
+<span class="nc" id="L29">		return queryService.getAll();</span>
+	}
+
+	@CrossOrigin
+	@PostMapping(&quot;/addQuery&quot;)
+	public String addQuery(@RequestBody @Valid Query query) {
+<span class="nc" id="L35">		String contact = queryService.addQuery(query);</span>
+<span class="nc" id="L36">		return contact;</span>
+	}
+
+	@CrossOrigin
+	@PutMapping(&quot;/updateQuery&quot;)
+	public String updateQuery(@RequestBody @Valid Query query) {
+<span class="nc" id="L42">		String response = queryService.updateQuery(query);</span>
+<span class="nc" id="L43">		return response;</span>
+	}
+
+	@CrossOrigin
+	@DeleteMapping(&quot;/deleteQuery&quot;)
+	public String deleteQuery(@RequestParam Long QueryID) {
+<span class="nc" id="L49">		String response = queryService.deleteQuery(QueryID);</span>
+<span class="nc" id="L50">		return response;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

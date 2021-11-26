@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientScheduleService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.service</a> &gt; <span class="el_source">ClientScheduleService.java</span></div><h1>ClientScheduleService.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.service;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.springboot.wecare.model.Appointment;
+import com.springboot.wecare.model.Caregiver;
+import com.springboot.wecare.model.ClientSchedule;
+import com.springboot.wecare.model.FirstTimeAppointment;
+import com.springboot.wecare.repository.AppointmentRepository;
+import com.springboot.wecare.repository.ClientScheduleRepository;
+import com.springboot.wecare.repository.FirstTimeAppointmentRepository;
+
+@Service
+<span class="nc" id="L20">public class ClientScheduleService implements IClientScheduleService{</span>
+	
+	@Autowired
+	ClientScheduleRepository clientScheduleRepository;
+	
+	@Autowired
+	FirstTimeAppointmentRepository ftaRepository;
+	
+	@Autowired
+	IFirstTimeAppointmentService firstTimeAptSer;
+	
+	@Autowired
+	AppointmentRepository appointmentRep;
+	
+	@Autowired
+	ICaregiverScheduleService css;
+	
+	@Override
+	public List&lt;Long&gt; getClientSchedule(Long clientId) {
+		List&lt;ClientSchedule&gt; clientScheduleList;
+<span class="nc" id="L40">		List&lt;Long&gt; finalClientScheduleList=new ArrayList&lt;Long&gt;();</span>
+<span class="nc" id="L41">		clientScheduleList = clientScheduleRepository.findAll();</span>
+		
+<span class="nc bnc" id="L43" title="All 2 branches missed.">		for(ClientSchedule z :clientScheduleList)</span>
+		{
+<span class="nc bnc" id="L45" title="All 2 branches missed.">			if(z.getClientId()==clientId)</span>
+			{
+<span class="nc" id="L47">				finalClientScheduleList.add(z.getClientScheduleId());</span>
+			}
+<span class="nc" id="L49">		}</span>
+		// TODO Auto-generated method stub
+<span class="nc" id="L51">		return finalClientScheduleList;</span>
+	}
+
+	public List&lt;Appointment&gt; generateClientSchedule(long firstAptId){
+
+<span class="nc" id="L56">			FirstTimeAppointment firstApt = ftaRepository.getById(firstAptId);</span>
+			
+<span class="nc" id="L58">			List&lt;Appointment&gt; listFinalApt = new ArrayList&lt;Appointment&gt;();</span>
+<span class="nc" id="L59">			int dur = Integer.parseInt(firstApt.getAppointmentDuration()); //number of days needed</span>
+<span class="nc" id="L60">			double freq = firstApt.getAppointmentFrequency(); //# per week, if &gt;7 then one or multiple days will have two apt </span>
+			//instead of frequency : let's set time apart from appointments (3 = every 3 days, 0.5 = every 12 hours)
+<span class="nc" id="L62">			int length = firstApt.getAppointmentLength(); //how long will an appointment last? in minutes</span>
+			
+<span class="nc" id="L64">			LocalDateTime tempDate = LocalDateTime.now().withHour(12).withMinute(0);</span>
+<span class="nc" id="L65">			LocalDateTime endDate = tempDate.plusDays(dur);</span>
+			
+<span class="nc" id="L67">			List&lt;LocalDateTime&gt; neededAptDates = new ArrayList&lt;LocalDateTime&gt;();</span>
+<span class="nc bnc" id="L68" title="All 4 branches missed.">			while (tempDate.isBefore(endDate)||tempDate.equals(endDate)) {</span>
+<span class="nc" id="L69">				neededAptDates.add(tempDate);</span>
+<span class="nc" id="L70">				tempDate = tempDate.plusHours(Math.round(freq*24));</span>
+			}
+			//CaregiverScheduleService css = new CaregiverScheduleService();
+<span class="nc bnc" id="L73" title="All 2 branches missed.">			for (LocalDateTime apt : neededAptDates) {</span>
+<span class="nc" id="L74">				int startTime = apt.getHour()*100+apt.getMinute();</span>
+<span class="nc" id="L75">				int endTime = apt.plusMinutes(length).getHour()*100+apt.plusMinutes(length).getMinute();</span>
+<span class="nc" id="L76">				List&lt;Caregiver&gt; available = css.findAvailableFor(apt.toLocalDate().toString(), startTime, endTime);</span>
+				
+<span class="nc bnc" id="L78" title="All 2 branches missed.">				while (available.isEmpty()){</span>
+<span class="nc" id="L79">					apt = apt.plusMinutes(30);</span>
+<span class="nc" id="L80">					startTime = apt.getHour()*100+apt.getMinute();</span>
+<span class="nc" id="L81">					endTime = apt.plusMinutes(length).getHour()*100+apt.plusMinutes(length).getMinute();</span>
+<span class="nc" id="L82">					available = css.findAvailableFor(apt.toLocalDate().toString(), startTime, endTime);		</span>
+				}
+				// next line randomly assigns a caregiver. will need to add the part where it actually asks the CGmanager to confirm
+<span class="nc" id="L85">				Random random = new Random();</span>
+<span class="nc" id="L86">				Caregiver cg = available.get(random.nextInt(available.size()));</span>
+				
+<span class="nc" id="L88">				ClientSchedule cs = new ClientSchedule();</span>
+<span class="nc" id="L89">				cs.setClientId(firstApt.getClientId());</span>
+<span class="nc" id="L90">				clientScheduleRepository.save(cs);</span>
+				
+<span class="nc" id="L92">				Appointment appt = new Appointment((apt.toLocalDate()).toString(), startTime, length, firstApt.getClientId(), cg.getCaregiverid(), &quot;False&quot;, cs.getClientScheduleId());	</span>
+<span class="nc" id="L93">				appointmentRep.save(appt);</span>
+<span class="nc" id="L94">				listFinalApt.add(appt);</span>
+<span class="nc" id="L95">			}</span>
+			
+<span class="nc" id="L97">		return null;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

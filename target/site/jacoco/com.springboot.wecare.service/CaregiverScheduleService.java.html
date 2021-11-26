@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaregiverScheduleService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.service</a> &gt; <span class="el_source">CaregiverScheduleService.java</span></div><h1>CaregiverScheduleService.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.springboot.wecare.model.Appointment;
+import com.springboot.wecare.model.Caregiver;
+import com.springboot.wecare.model.CaregiverSchedule;
+import com.springboot.wecare.repository.AppointmentRepository;
+import com.springboot.wecare.repository.CaregiverRepository;
+import com.springboot.wecare.repository.CaregiverScheduleRepository;
+@Service
+<span class="nc" id="L17">public class CaregiverScheduleService implements ICaregiverScheduleService {</span>
+
+	@Autowired
+	CaregiverScheduleRepository caregiverScheduleRepository;
+	
+	@Autowired
+	CaregiverRepository caregiverRepository;
+	
+	@Autowired
+	ICaregiverService cgService; 
+	
+	@Autowired
+	AppointmentRepository aptRepository;
+
+	public List&lt;CaregiverSchedule&gt; getAllEmployeeSchedules() {
+<span class="nc" id="L32">		return caregiverScheduleRepository.findAll();</span>
+	}
+
+	public List&lt;CaregiverSchedule&gt; getEmployeeSchedule(long caregiverId){
+<span class="nc" id="L36">		List&lt;CaregiverSchedule&gt; allCgSch = getAllEmployeeSchedules();</span>
+<span class="nc" id="L37">		List&lt;CaregiverSchedule&gt; cgSch = new ArrayList&lt;CaregiverSchedule&gt;();</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">		for (CaregiverSchedule cg : allCgSch) {</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">			if (cg.getCaregiverid()==caregiverId) {</span>
+<span class="nc" id="L40">				cgSch.add(cg);</span>
+			}
+<span class="nc" id="L42">		}</span>
+<span class="nc" id="L43">		return cgSch;</span>
+	}
+	
+	public List&lt;Appointment&gt; getAllAptFor(LocalDate date, long cgId){
+<span class="nc" id="L47">		List&lt;Appointment&gt; all = aptRepository.findAll();</span>
+<span class="nc" id="L48">		List&lt;Appointment&gt; ok = new ArrayList&lt;Appointment&gt;();</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">		for (Appointment apt : all) {</span>
+<span class="nc bnc" id="L50" title="All 4 branches missed.">			if(apt.getCaregiverID()==cgId &amp;&amp; LocalDate.parse(apt.getAppointmentDate()).equals(date)) {</span>
+<span class="nc" id="L51">				ok.add(apt);</span>
+			}
+<span class="nc" id="L53">		}</span>
+<span class="nc" id="L54">		return ok;</span>
+	}
+
+	public List&lt;Caregiver&gt; findAvailableFor(String date, int startTime, int endTime){
+<span class="nc" id="L58">		List&lt;CaregiverSchedule&gt; allCgSch = getAllEmployeeSchedules();</span>
+<span class="nc" id="L59">		List&lt;Caregiver&gt; cgList = new ArrayList&lt;Caregiver&gt;();</span>
+		
+<span class="nc bnc" id="L61" title="All 2 branches missed.">		for (CaregiverSchedule cg : allCgSch) {</span>
+<span class="nc" id="L62">			boolean flag = true;</span>
+			//checking the caregiver will be working during the given time slot
+<span class="nc bnc" id="L64" title="All 6 branches missed.">			if (cg.getDate().equals(date) &amp;&amp; cg.getStartTime()&lt;startTime &amp;&amp; cg.getEndTime() &gt; endTime) {</span>
+				//condition to check that they don't already have an appointment:
+<span class="nc" id="L66">				List&lt;Appointment&gt; all = getAllAptFor(LocalDate.parse(date), cg.getCaregiverid());</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">				for (Appointment apt : all) { //manually checking that </span>
+					//this new apt would not coincide with an already existing apt
+<span class="nc bnc" id="L69" title="All 4 branches missed.">					if ((apt.getAppointmentStartTime()&gt;= startTime &amp;&amp; apt.getAppointmentStartTime()&lt;=endTime)||</span>
+<span class="nc bnc" id="L70" title="All 4 branches missed.">					(apt.getAppointmentEndTime()&gt;= startTime &amp;&amp; apt.getAppointmentEndTime()&lt;=endTime)) {</span>
+<span class="nc" id="L71">						flag=false;</span>
+					}
+<span class="nc" id="L73">				}</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">				if (flag) {</span>
+<span class="nc" id="L75">					cgList.add(cgService.caregiverInfo(cg.getCaregiverid()));</span>
+				}
+			}
+<span class="nc" id="L78">		}</span>
+<span class="nc" id="L79">		return cgList;</span>
+	}
+
+	public String addShift(CaregiverSchedule cgSch) {
+		try {
+<span class="nc" id="L84">			caregiverScheduleRepository.save(cgSch);</span>
+<span class="nc" id="L85">		} catch (Exception e) {</span>
+<span class="nc" id="L86">			return e.getMessage();</span>
+<span class="nc" id="L87">		}</span>
+<span class="nc" id="L88">		return &quot;Shift Added&quot;;</span>
+	}
+
+	public String removeShift(long cgSchId) {
+		try {
+<span class="nc" id="L93">			caregiverScheduleRepository.deleteById(cgSchId);</span>
+<span class="nc" id="L94">		} catch (Exception e) {</span>
+<span class="nc" id="L95">			return e.getMessage();</span>
+<span class="nc" id="L96">		}</span>
+<span class="nc" id="L97">		return &quot;Shift Removed&quot;;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

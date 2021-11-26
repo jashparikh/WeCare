@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Client.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.model</a> &gt; <span class="el_source">Client.java</span></div><h1>Client.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.model;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+//javax = loose coupling 
+@Entity //this class is a table
+@Table(name = &quot;cli&quot;) //access : wecare.cli
+
+public class Client {
+
+	@Id //next thing will be a primary key
+	@Column(name = &quot;client_id&quot;)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long clientId;
+
+	@Column(name = &quot;client_Fname&quot;) //first name / surname
+	private String clientFName;
+	
+	@Column(name = &quot;client_Sname&quot;)
+	private String clientSName;
+	
+	@Column(name = &quot;client_email&quot;)
+	private String clientEmail;
+	
+	@Column(name = &quot;client_dob&quot;)
+	private String clientDob; //string or int in format YYYYMMDD?  
+	
+	@Column(name = &quot;client_weight&quot;)
+	private float clientWeight;
+
+	@Column(name = &quot;client_address_id&quot;)
+	private long clientAddressId;
+	
+	@Column(name = &quot;client_about&quot;)
+	private String clientAbt; 
+	
+	@Column(name = &quot;client_contact_no&quot;)
+	private String clientNumber; //(max 31)
+	
+	@Column(name = &quot;client_login_id&quot;)
+	private int clientLoginId; //(max 31)
+	
+	public Client() {
+<span class="nc" id="L48">		super();</span>
+<span class="nc" id="L49">	}</span>
+
+	public Long getClientId() {
+<span class="nc" id="L52">		return clientId;</span>
+	}
+
+	public void setClientId(Long clientId) {
+<span class="nc" id="L56">		this.clientId = clientId;</span>
+<span class="nc" id="L57">	}</span>
+
+	public String getClientFName() {
+<span class="nc" id="L60">		return clientFName;</span>
+	}
+
+	public void setClientFName(String clientFName) {
+<span class="nc" id="L64">		this.clientFName = clientFName;</span>
+<span class="nc" id="L65">	}</span>
+
+	public String getClientSName() {
+<span class="nc" id="L68">		return clientSName;</span>
+	}
+
+	public void setClientSName(String clientSName) {
+<span class="nc" id="L72">		this.clientSName = clientSName;</span>
+<span class="nc" id="L73">	}</span>
+
+	public String getClientEmail() {
+<span class="nc" id="L76">		return clientEmail;</span>
+	}
+
+	public void setClientEmail(String clientEmail) {
+<span class="nc" id="L80">		this.clientEmail = clientEmail;</span>
+<span class="nc" id="L81">	}</span>
+
+	public String getClientDob() {
+<span class="nc" id="L84">		return clientDob;</span>
+	}
+
+	public void setClientDob(String clientDob) {
+<span class="nc" id="L88">		this.clientDob = clientDob;</span>
+<span class="nc" id="L89">	}</span>
+
+	public float getClientWeight() {
+<span class="nc" id="L92">		return clientWeight;</span>
+	}
+
+	public void setClientWeight(float clientWeight) {
+<span class="nc" id="L96">		this.clientWeight = clientWeight;</span>
+<span class="nc" id="L97">	}</span>
+
+	public long getClientAddressId() {
+<span class="nc" id="L100">		return clientAddressId;</span>
+	}
+
+	public void setClientAddressId(long clientAddressId) {
+<span class="nc" id="L104">		this.clientAddressId = clientAddressId;</span>
+<span class="nc" id="L105">	}</span>
+
+	public String getClientAbt() {
+<span class="nc" id="L108">		return clientAbt;</span>
+	}
+
+	public void setClientAbt(String clientAbt) {
+<span class="nc" id="L112">		this.clientAbt = clientAbt;</span>
+<span class="nc" id="L113">	}</span>
+
+	public String getClientNumber() {
+<span class="nc" id="L116">		return clientNumber;</span>
+	}
+
+	public void setClientNumber(String clientNumber) {
+<span class="nc" id="L120">		this.clientNumber = clientNumber;</span>
+<span class="nc" id="L121">	}</span>
+
+	public int getClientLoginId() {
+<span class="nc" id="L124">		return clientLoginId;</span>
+	}
+
+	public void setClientLoginId(int clientLoginId) {
+<span class="nc" id="L128">		this.clientLoginId = clientLoginId;</span>
+<span class="nc" id="L129">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L133">		return &quot;Client [clientId=&quot; + clientId + &quot;, clientFName=&quot; + clientFName + &quot;, clientSName=&quot; + clientSName</span>
+				+ &quot;, clientEmail=&quot; + clientEmail + &quot;, clientDob=&quot; + clientDob + &quot;, clientWeight=&quot; + clientWeight
+				+ &quot;, clientAddressId=&quot; + clientAddressId + &quot;, clientAbt=&quot; + clientAbt + &quot;, clientNumber=&quot; + clientNumber
+				+ &quot;, clientLoginId=&quot; + clientLoginId + &quot;]&quot;;
+	}
+
+	public Client(Long clientId, String clientFName, String clientSName, String clientEmail, String clientDob,
+			float clientWeight, long clientAddressId, String clientAbt, String clientNumber, int clientLoginId) {
+<span class="nc" id="L141">		super();</span>
+<span class="nc" id="L142">		this.clientId = clientId;</span>
+<span class="nc" id="L143">		this.clientFName = clientFName;</span>
+<span class="nc" id="L144">		this.clientSName = clientSName;</span>
+<span class="nc" id="L145">		this.clientEmail = clientEmail;</span>
+<span class="nc" id="L146">		this.clientDob = clientDob;</span>
+<span class="nc" id="L147">		this.clientWeight = clientWeight;</span>
+<span class="nc" id="L148">		this.clientAddressId = clientAddressId;</span>
+<span class="nc" id="L149">		this.clientAbt = clientAbt;</span>
+<span class="nc" id="L150">		this.clientNumber = clientNumber;</span>
+<span class="nc" id="L151">		this.clientLoginId = clientLoginId;</span>
+<span class="nc" id="L152">	}</span>
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaregiverManagerService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.service</a> &gt; <span class="el_source">CaregiverManagerService.java</span></div><h1>CaregiverManagerService.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.springboot.wecare.model.CaregiverManager;
+import com.springboot.wecare.repository.CaregiverManagerRepository;
+
+@Service
+<span class="nc" id="L16">public class CaregiverManagerService implements ICaregiverManagerService {</span>
+
+	@Autowired
+	CaregiverManagerRepository caregiverManagerRepository;
+
+	@Override
+	@Transactional
+	public List&lt;CaregiverManager&gt; getManagers() {
+
+		List&lt;CaregiverManager&gt; managerList;
+		try {
+<span class="nc" id="L27">			managerList = caregiverManagerRepository.findAll();</span>
+<span class="nc" id="L28">		} catch (Exception e) {</span>
+<span class="nc" id="L29">			return null;</span>
+<span class="nc" id="L30">		}</span>
+
+<span class="nc" id="L32">		return managerList;</span>
+	}
+
+	@Transactional
+	@Override
+	public String queryResponse(@Valid String response) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L39">		return null;</span>
+	}
+
+	@Transactional
+	@Override
+	public CaregiverManager getManagerById(@Valid long managerId) {
+<span class="nc" id="L45">		CaregiverManager manager = new CaregiverManager();</span>
+		try {
+<span class="nc" id="L47">			Optional&lt;CaregiverManager&gt; searchRecord = caregiverManagerRepository.findById(managerId);</span>
+<span class="nc" id="L48">			manager = searchRecord.get();</span>
+<span class="nc" id="L49">		} catch (Exception e) {</span>
+<span class="nc" id="L50">			manager = null;</span>
+<span class="nc" id="L51">			return manager;</span>
+<span class="nc" id="L52">		}</span>
+
+<span class="nc" id="L54">		return manager;</span>
+	}
+
+	@Transactional
+	@Override
+	public String addManager(@Valid CaregiverManager manager) {
+		try {
+<span class="nc" id="L61">			caregiverManagerRepository.save(manager);</span>
+<span class="nc" id="L62">		} catch (Exception e) {</span>
+<span class="nc" id="L63">			return e.getMessage();</span>
+<span class="nc" id="L64">		}</span>
+<span class="nc" id="L65">		return &quot;manager added&quot;;</span>
+	}
+
+	@Transactional
+	@Override
+	public String deleteManager(@Valid long managerId) {
+		try {
+<span class="nc" id="L72">			caregiverManagerRepository.deleteById(managerId);</span>
+<span class="nc" id="L73">		} catch (Exception e) {</span>
+<span class="nc" id="L74">			return e.getMessage();</span>
+<span class="nc" id="L75">		}</span>
+
+<span class="nc" id="L77">		return (&quot;manager deleted&quot;);</span>
+	}
+
+	@Transactional
+	@Override
+	public String updateManager(@Valid CaregiverManager manager) {
+<span class="nc" id="L83">		Optional&lt;CaregiverManager&gt; searchRecord = caregiverManagerRepository.findById(manager.getCaregiverManagerId());</span>
+
+<span class="nc bnc" id="L85" title="All 2 branches missed.">		if (searchRecord.isPresent()) {</span>
+			try {
+
+<span class="nc" id="L88">				CaregiverManager updateManager = searchRecord.get();</span>
+
+<span class="nc" id="L90">				updateManager.setCaregiverManagerContactNo(manager.getCaregiverManagerContactNo());</span>
+<span class="nc" id="L91">				updateManager.setAddressId(manager.getAddressId());</span>
+<span class="nc" id="L92">				updateManager.setCaregiverManagerDob(manager.getCaregiverManagerDob());</span>
+<span class="nc" id="L93">				updateManager.setCaregiverManagerEmail(manager.getCaregiverManagerEmail());</span>
+<span class="nc" id="L94">				updateManager.setCaregiverManagerName(manager.getCaregiverManagerName());</span>
+<span class="nc" id="L95">				updateManager.setLoginId(manager.getLoginId());</span>
+
+<span class="nc" id="L97">				caregiverManagerRepository.save(updateManager);</span>
+
+<span class="nc" id="L99">			} catch (Exception e) {</span>
+<span class="nc" id="L100">				return e.getMessage();</span>
+<span class="nc" id="L101">			}</span>
+		} else {
+<span class="nc" id="L103">			return &quot;Manager Doesn't Exist&quot;;</span>
+		}
+<span class="nc" id="L105">		return &quot;Manager Updated&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

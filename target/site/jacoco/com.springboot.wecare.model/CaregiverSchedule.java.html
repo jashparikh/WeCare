@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaregiverSchedule.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.model</a> &gt; <span class="el_source">CaregiverSchedule.java</span></div><h1>CaregiverSchedule.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity  //annotation for table class this class is a table
+@Table(name = &quot;caregiver_schedule&quot;)
+
+public class CaregiverSchedule {
+	@Id
+	@Column(name = &quot;shift_id&quot;)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long shiftId;
+	
+	@Column(name = &quot;caregiver_id&quot;)
+	private long caregiverid;
+
+	@Column(name = &quot;date&quot;)
+	private String date; //format it YYYY-MM-DD
+
+	@Column(name = &quot;start_time&quot;)
+	private int startTime; //format it like 0800, 1530
+	
+	@Column(name = &quot;end_time&quot;)
+	private int endTime;
+
+	public long getshiftId() {
+<span class="nc" id="L32">		return shiftId;</span>
+	}
+
+	public void setshiftId(int shiftId) {
+<span class="nc" id="L36">		this.shiftId = shiftId;</span>
+<span class="nc" id="L37">	}</span>
+
+	public long getCaregiverid() {
+<span class="nc" id="L40">		return caregiverid;</span>
+	}
+
+	public void setCaregiverid(long caregiverid) {
+<span class="nc" id="L44">		this.caregiverid = caregiverid;</span>
+<span class="nc" id="L45">	}</span>
+
+	public String getDate() {
+<span class="nc" id="L48">		return date;</span>
+	}
+
+	public void setDate(String date) {
+<span class="nc" id="L52">		this.date = date;</span>
+<span class="nc" id="L53">	}</span>
+
+	public int getStartTime() {
+<span class="nc" id="L56">		return startTime;</span>
+	}
+
+	public void setStartTime(int startTime) {
+<span class="nc" id="L60">		this.startTime = startTime;</span>
+<span class="nc" id="L61">	}</span>
+
+	public int getEndTime() {
+<span class="nc" id="L64">		return endTime;</span>
+	}
+
+	public void setEndTime(int endTime) {
+<span class="nc" id="L68">		this.endTime = endTime;</span>
+<span class="nc" id="L69">	}</span>
+
+	public CaregiverSchedule(long shiftId, long caregiverid, String date, int startTime, int endTime) {
+<span class="nc" id="L72">		super();</span>
+<span class="nc" id="L73">		this.shiftId = shiftId;</span>
+<span class="nc" id="L74">		this.caregiverid = caregiverid;</span>
+<span class="nc" id="L75">		this.date = date;</span>
+<span class="nc" id="L76">		this.startTime = startTime;</span>
+<span class="nc" id="L77">		this.endTime = endTime;</span>
+<span class="nc" id="L78">	}</span>
+	
+	public void getThings() {
+<span class="nc" id="L81">		return;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

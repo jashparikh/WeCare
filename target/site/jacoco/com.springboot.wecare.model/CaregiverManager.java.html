@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaregiverManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WeCare</a> &gt; <a href="index.source.html" class="el_package">com.springboot.wecare.model</a> &gt; <span class="el_source">CaregiverManager.java</span></div><h1>CaregiverManager.java</h1><pre class="source lang-java linenums">package com.springboot.wecare.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;manager&quot;)
+public class CaregiverManager {
+
+	@Id
+	@Column(name = &quot;manager_id&quot;)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long caregiverManagerId;
+
+	@Column(name = &quot;manager_name&quot;)
+	private String caregiverManagerName;
+
+	@Column(name = &quot;manager_email&quot;)
+	private String caregiverManagerEmail;
+
+	@Column(name = &quot;manager_dob&quot;)
+	private String caregiverManagerDob;
+
+	@Column(name = &quot;manager_contact_no&quot;)
+	private String caregiverManagerContactNo;
+
+	@Column(name = &quot;address_id&quot;)
+	private int addressId;
+
+	@Column(name = &quot;login_id&quot;)
+	private int loginId;
+
+	public CaregiverManager() {
+<span class="nc" id="L38">		super();</span>
+<span class="nc" id="L39">	}</span>
+
+	public CaregiverManager(Long caregiverManagerId, String caregiverManagerName, String caregiverManagerEmail,
+			String caregiverManagerDob, String caregiverManagerContactNo, int addressId, int loginId) {
+<span class="nc" id="L43">		super();</span>
+<span class="nc" id="L44">		this.caregiverManagerId = caregiverManagerId;</span>
+<span class="nc" id="L45">		this.caregiverManagerName = caregiverManagerName;</span>
+<span class="nc" id="L46">		this.caregiverManagerEmail = caregiverManagerEmail;</span>
+<span class="nc" id="L47">		this.caregiverManagerDob = caregiverManagerDob;</span>
+<span class="nc" id="L48">		this.caregiverManagerContactNo = caregiverManagerContactNo;</span>
+<span class="nc" id="L49">		this.addressId = addressId;</span>
+<span class="nc" id="L50">		this.loginId = loginId;</span>
+<span class="nc" id="L51">	}</span>
+
+	public Long getCaregiverManagerId() {
+<span class="nc" id="L54">		return caregiverManagerId;</span>
+	}
+
+	public void setCaregiverManagerId(Long caregiverManagerId) {
+<span class="nc" id="L58">		this.caregiverManagerId = caregiverManagerId;</span>
+<span class="nc" id="L59">	}</span>
+
+	public String getCaregiverManagerName() {
+<span class="nc" id="L62">		return caregiverManagerName;</span>
+	}
+
+	public void setCaregiverManagerName(String caregiverManagerName) {
+<span class="nc" id="L66">		this.caregiverManagerName = caregiverManagerName;</span>
+<span class="nc" id="L67">	}</span>
+
+	public String getCaregiverManagerEmail() {
+<span class="nc" id="L70">		return caregiverManagerEmail;</span>
+	}
+
+	public void setCaregiverManagerEmail(String caregiverManagerEmail) {
+<span class="nc" id="L74">		this.caregiverManagerEmail = caregiverManagerEmail;</span>
+<span class="nc" id="L75">	}</span>
+
+	public String getCaregiverManagerDob() {
+<span class="nc" id="L78">		return caregiverManagerDob;</span>
+	}
+
+	public void setCaregiverManagerDob(String caregiverManagerDob) {
+<span class="nc" id="L82">		this.caregiverManagerDob = caregiverManagerDob;</span>
+<span class="nc" id="L83">	}</span>
+
+	public String getCaregiverManagerContactNo() {
+<span class="nc" id="L86">		return caregiverManagerContactNo;</span>
+	}
+
+	public void setCaregiverManagerContactNo(String caregiverManagerContactNo) {
+<span class="nc" id="L90">		this.caregiverManagerContactNo = caregiverManagerContactNo;</span>
+<span class="nc" id="L91">	}</span>
+
+	public int getAddressId() {
+<span class="nc" id="L94">		return addressId;</span>
+	}
+
+	public void setAddressId(int addressId) {
+<span class="nc" id="L98">		this.addressId = addressId;</span>
+<span class="nc" id="L99">	}</span>
+
+	public int getLoginId() {
+<span class="nc" id="L102">		return loginId;</span>
+	}
+
+	public void setLoginId(int loginId) {
+<span class="nc" id="L106">		this.loginId = loginId;</span>
+<span class="nc" id="L107">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L111">		return &quot;CaregiverManager [caregiverManagerId=&quot; + caregiverManagerId + &quot;, caregiverManagerName=&quot;</span>
+				+ caregiverManagerName + &quot;, caregiverManagerEmail=&quot; + caregiverManagerEmail + &quot;, caregiverManagerDob=&quot;
+				+ caregiverManagerDob + &quot;, caregiverManagerContactNo=&quot; + caregiverManagerContactNo + &quot;, addressId=&quot;
+				+ addressId + &quot;, loginId=&quot; + loginId + &quot;]&quot;;
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
